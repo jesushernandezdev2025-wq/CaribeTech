@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CaribeTech - Innovación digital en Latinoamérica. Soluciones tecnológicas modernas y escalables.">
+  <meta name="keywords" content="tecnología, innovación, Latinoamérica, soluciones digitales">
+  <meta name="author" content="CaribeTech">
+  <title>CaribeTech - Innovación Digital en Latinoamérica</title>
+
+  <!-- Preconexión para mejorar rendimiento -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../css/style-index.css">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caribetech.com/">
+  <meta property="og:title" content="CaribeTech - Innovación Digital">
+  <meta property="og:description" content="Impulsando la tecnología en Latinoamérica con soluciones innovadoras">
+  <meta property="og:image" content="../img/CaribeTech - Logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://caribetech.com/">
+  <meta property="twitter:title" content="CaribeTech - Innovación Digital">
+  <meta property="twitter:description" content="Impulsando la tecnología en Latinoamérica con soluciones innovadoras">
+  <meta property="twitter:image" content="../img/CaribeTech - Logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../img/CaribeTech - favicon.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="logo">
+      <a href="index.html" aria-label="CaribeTech Inicio">
+        <img src="../img/CaribeTech - Navideño.png" alt="Logo CaribeTech" width="180" height="50" loading="lazy">
+      </a>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="aplicacion.html">Aplicaciones</a></li>
+        <li><a href="tiktok.html">TikTok</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="colaboracion.html">Colaboración</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón menú móvil (mejora accesibilidad) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" role="banner">
+      <div class="hero-content">
+        <h1>Impulsando la tecnología en Latinoamérica</h1>
+        <p>CaribeTech es la marca matriz que conecta innovación, confianza y crecimiento digital en la región.</p>
+        <a href="aplicacion.html" class="btn btn-primary" role="button">Explora nuestras aplicaciones</a>
+      </div>
+ <!-- Capas de efectos -->
+  <div class="snow"></div>
+  <div class="trees-falling"></div>
+
+      
+      <!-- Elemento decorativo adicional -->
+      <div class="hero-decoration" aria-hidden="true"></div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading">Nuestros pilares</h2>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-lightbulb fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Innovación</h3>
+            <p>Soluciones modernas y escalables para técnicos y usuarios.</p>
+            <a href="inno.html" class="feature-link" aria-label="Más sobre Innovación">Saber más →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Confianza</h3>
+            <p>Construimos reputación y seguridad en cada interacción.</p>
+            <a href="confianza.html" class="feature-link" aria-label="Más sobre Confianza">Saber más →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Crecimiento</h3>
+            <p>Impulsamos el desarrollo profesional en toda Latinoamérica.</p>
+            <a href="crecimiento.html" class="feature-link" aria-label="Más sobre Crecimiento">Saber más →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+<section class="testimonials">
+  <div class="testimonials-container">
+    <h2 class="section-title">Lo que opinan nuestros clientes</h2>
+
+    <div class="testimonials-grid">
+      <blockquote class="testimonial-card">
+        <p class="testimonial-text">
+          “”
+        </p>
+        <cite class="testimonial-author">— Nuevos comentarios, pronto.</cite>
+      </blockquote>
+
+      <blockquote class="testimonial-card">
+        <p class="testimonial-text">
+          “”
+        </p>
+        <cite class="testimonial-author">— Nuevos comentarios, pronto.</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links" role="list" aria-label="Redes sociales">
+          <a href="https://twitter.com/caribetech" target="_blank" rel="noopener noreferrer" aria-label="Twitter de CaribeTech">
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+          <a href="https://instagram.com/caribetech" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CaribeTech">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://linkedin.com/company/caribetech" target="_blank" rel="noopener noreferrer" aria-label="TikTok de CaribeTech">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Enlaces rápidos</h3>
+        <nav aria-label="Enlaces del pie de página">
+          <ul>
+            <p><a href="privacidad.html">Política de privacidad</a></p>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p><a href="contacto.html">Contáctanos</a></p>
+      <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/script.js" defer></script>
+  
+  <!-- Schema.org structured data para SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Caribe

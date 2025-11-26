@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaribeTech - Contacto</title>
+  <link rel="stylesheet" href="../css/style-contacto.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../img/Navidad/Favicon Web Navideño.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="logo">
+      <a href="index.html" aria-label="CaribeTech Inicio">
+        <img src="../img/Navidad/CaribeTech - Navideño png.png" alt="Logo CaribeTech" width="180" height="50" loading="lazy">
+      </a>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="aplicacion.html">Aplicaciones</a></li>
+        <li><a href="tiktok.html">TikTok</a></li>
+        <li><a href="contacto.html" class="active" aria-current="page">Contacto</a></li>
+        <li><a href="colaboracion.html">Colaboración</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón menú móvil (mejora accesibilidad) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+
+  <!-- =====================================================
+       CONTENIDO PRINCIPAL
+  ===================================================== -->
+  <main class="contact">
+
+    <section class="contact-header" aria-labelledby="contact-title">
+      <h1 id="contact-title">📬 Contáctanos</h1>
+      <p>
+        ¿Tienes preguntas, ideas o deseas trabajar con nosotros?  
+        En CaribeTech estamos listos para escucharte.
+      </p>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section class="contact-form-section" aria-labelledby="form-title">
+      <h2 id="form-title">Formulario de Contacto</h2>
+
+      <form class="contact-form" action="#" method="post">
+
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe aquí tu mensaje..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-send">Enviar mensaje</button>
+
+      </form>
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+  <footer class="footer" role="contentinfo">
+    <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+
+</body>
+</html>

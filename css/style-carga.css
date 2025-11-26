@@ -1,0 +1,358 @@
+/* ===============================
+   BASE Y VARIABLES
+   =============================== */
+:root {
+  --primary-color: #ff4e4e;
+  --secondary-color: rgb(255, 0, 0);
+  --bg-dark: #330d0d;
+  --bg-medium: #4e1414;
+  --text-light: #ffeaea;
+  --shadow-intense: 0 0 20px var(--primary-color),
+                   0 0 40px var(--secondary-color),
+                   0 0 60px var(--primary-color);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===============================
+   BODY Y CONTENEDOR
+   =============================== */
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at center, var(--bg-medium) 0%, var(--bg-dark) 100%);
+  color: var(--text-light);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(78, 242, 255, 0.03) 50%,
+    transparent 70%
+  );
+  animation: bgMove 15s linear infinite;
+}
+
+.loader-container {
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 1.5s var(--transition-smooth) forwards;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   LOGO PREMIUM MEJORADO
+   =============================== */
+.logo-img {
+  width: 320px;
+  height: 320px;
+  background-image: url("../img/CaribeTech\ -\ Navideño.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto 40px auto;
+  opacity: 0;
+  animation: logoPopup 2s var(--transition-smooth) forwards;
+  filter: drop-shadow(0 0 20px var(--primary-color))
+          drop-shadow(0 0 40px var(--secondary-color))
+          drop-shadow(0 0 60px rgba(255, 78, 78, 0.5));
+  border-radius: 30px;
+  position: relative;
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+.logo-img::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, var(--primary-color), transparent, var(--secondary-color));
+  border-radius: 35px;
+  opacity: 0;
+  z-index: -1;
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.logo-img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* ===============================
+   SPINNER NEÓN AVANZADO
+   =============================== */
+.spinner {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin: 30px auto;
+}
+
+.spinner::before,
+.spinner::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 6px solid transparent;
+}
+
+.spinner::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top-color: var(--primary-color);
+  border-right-color: var(--secondary-color);
+  animation: spin 1s linear infinite;
+  box-shadow: var(--shadow-intense);
+}
+
+.spinner::after {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-bottom-color: var(--primary-color);
+  border-left-color: var(--secondary-color);
+  animation: spin 1.5s linear infinite reverse;
+  opacity: 0.6;
+}
+
+/* ===============================
+   TEXTO DE CARGA MEJORADO
+   =============================== */
+.loading-text {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  opacity: 0;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--secondary-color),
+               0 0 20px var(--primary-color),
+               0 0 30px rgba(255, 78, 78, 0.5);
+  animation: textFade 2s var(--transition-smooth) forwards;
+  position: relative;
+}
+
+.loading-text::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  animation: textLine 2s ease-in-out infinite;
+}
+
+/* ===============================
+   ANIMACIONES MEJORADAS
+   =============================== */
+@keyframes bgMove {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to { 
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes logoPopup {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-180deg) perspective(1000px) rotateY(45deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(10deg) perspective(1000px) rotateY(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg) perspective(1000px) rotateY(0deg);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+
+@keyframes textFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes textLine {
+  0%, 100% { width: 0; opacity: 0; }
+  50% { width: 100%; opacity: 1; }
+}
+
+/* ===============================
+   EFECTOS ADICIONALES
+   =============================== */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float 10s infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+.particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+.particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+.particle:nth-child(9) { left: 90%; animation-delay: 8s; }
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(90vh) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(10vh) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 900px) {
+  .logo-img {
+    width: 240px;
+    height: 240px;
+  }
+
+  .spinner {
+    width: 60px;
+    height: 60px;
+  }
+
+  .loading-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo-img {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 25px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .loading-text {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  body::before {
+    background: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba(78, 242, 255, 0.02) 50%,
+      transparent 75%
+    );
+  }
+}
+
+@media (max-width: 400px) {
+  .logo-img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .loading-text {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}
+
+/* ===============================
+   OPTIMIZACIONES PARA MÓVILES
+   =============================== */
+body {
+  background-attachment: scroll; /* evita parallax pesado en móviles */
+}
+
+.particles {
+  display: none; /* partículas opcionales ocultas en móviles para performance */
+}
+

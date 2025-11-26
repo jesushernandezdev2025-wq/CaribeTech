@@ -1,0 +1,323 @@
+/* =====================================================
+   RESET Y BASE GENERAL
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #4b6e86;
+  color: #EAF5FF;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor general */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* =====================================================
+   HEADER FIJO CON MEJORAS
+   ===================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.582);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #0E1A24;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-bottom: 3px;
+  transition: color 0.25s ease, border 0.25s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #0B6A8A;
+  border-color: #0B6A8A;
+}
+
+/* =====================================================
+   SECCIÓN PRINCIPAL
+   ===================================================== */
+.about {
+  padding-top: 160px; /* espacio por el header fijo */
+  padding-bottom: 80px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* =============================
+   INTRO
+   ============================= */
+.intro {
+  text-align: center;
+  margin-bottom: 70px;
+  animation: fadeInUp 1s ease;
+}
+
+.intro h1 {
+  font-size: 2.7rem;
+  background: linear-gradient(90deg, #4ac2dd, #8be9ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.intro p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 1.15rem;
+  color: #cce9f5;
+  opacity: 0.9;
+}
+
+/* =============================
+   TARJETAS: Misión / Visión / Valores
+   ============================= */
+.mission,
+.vision,
+.values {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 35px 40px;
+  border-radius: 18px;
+  margin-bottom: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  animation: fadeInUp 1s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission:hover,
+.vision:hover,
+.values:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 200, 255, 0.07);
+}
+
+.mission h2,
+.vision h2,
+.values h2 {
+  font-size: 2rem;
+  color: #7cdfff;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.mission h2::after,
+.vision h2::after,
+.values h2::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  bottom: -8px;
+  left: 0;
+  background: linear-gradient(90deg, #4ac2dd, #80e8ff);
+  border-radius: 2px;
+}
+
+.mission p,
+.vision p {
+  font-size: 1.05rem;
+  color: #d7eefe;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+.values ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.values li {
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  color: #d9f4ff;
+  border-left: 3px solid #48C7E8;
+  padding-left: 12px;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.footer {
+  background: #0A1219;
+  text-align: center;
+  padding: 40px 20px;
+  color: #AFC4D1;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer p {
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+}
+
+/* =====================================================
+   ANIMACIONES
+   ===================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 920px) {
+  .header-container {
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .intro h1 {
+    font-size: 2.2rem;
+  }
+
+  .mission,
+  .vision,
+  .values {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 490px) {
+  .logo img {
+    width: 200px;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+}
+
+/* =====================================================
+   MENÚ MÓVIL — Versión limpia y profesional
+   ===================================================== */
+
+/* Contenedor del botón hamburguesa */
+.mobile-menu-toggle {
+  display: none; /* Oculto en escritorio */
+  flex-direction: column;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Líneas del icono */
+.hamburger-line {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background-color: #0E1A24;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* Menú móvil */
+.nav ul.nav-open {
+  display: flex !important;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 25px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  animation: slideDown 0.35s ease forwards;
+}
+
+/* Animación suave hacia abajo */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mostrar menú solo en móvil */
+@media (max-width: 900px) {
+  .nav ul {
+    display: none; /* Oculto hasta que se active */
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+/* Asegurar que las pseudo-capas de las tarjetas no afecten el menú */
+.feature-card::before,
+.feature-card::after {
+  pointer-events: none;
+}
