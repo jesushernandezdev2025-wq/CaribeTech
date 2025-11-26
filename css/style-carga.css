@@ -2,10 +2,10 @@
    BASE Y VARIABLES
    =============================== */
 :root {
-  --primary-color: #ff4e4e;
-  --secondary-color: rgb(255, 0, 0);
-  --bg-dark: #330d0d;
-  --bg-medium: #4e1414;
+  --primary-color: #4e95ff;
+  --secondary-color: rgb(0, 140, 255);
+  --bg-dark: #0d2f33;
+  --bg-medium: #14324e;
   --text-light: #ffeaea;
   --shadow-intense: 0 0 20px var(--primary-color),
                    0 0 40px var(--secondary-color),
@@ -60,7 +60,7 @@ body::before {
 .logo-img {
   width: 320px;
   height: 320px;
-  background-image: url("../img/CaribeTech\ -\ Navideño.png");
+  background-image: url("../img/Navidad/CaribeTech\ -\ Navideño\ png.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
