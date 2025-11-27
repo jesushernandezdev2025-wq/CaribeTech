@@ -137,11 +137,21 @@ body {
 /* WIDGET DE HORA (arriba del boton de musica) */
     .timezone-toggle {
       position: fixed;
-      bottom: 95px; /* deja espacio sobre el botón de música */
-      right: 25px;
-      z-index: 999999999;
-      font-family: inherit;
-    }
+  bottom: 95px;
+  right: 25px;
+  background: linear-gradient(135deg, #d62626, #ff5e5e);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, background 0.3s ease;
+
+  z-index: 999999999 !important; /* 🔥 SUPER ALTO */
+}
     #timezoneBtn {
       background: rgb(17, 0, 255);
       border: 2px solid #1e799700;
@@ -155,7 +165,10 @@ body {
       align-items: center;
       gap: 8px;
     }
-    #timezoneBtn:hover { background: #0011ff; color: #fff; transform: scale(1.03); }
+    #timezoneBtn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #ff3b3b, #ff7979);
+}
 
     .timezone-menu {
       display: none;
