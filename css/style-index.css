@@ -613,8 +613,8 @@ body {
       font-family: inherit;
     }
     #timezoneBtn {
-      background: rgba(255,255,255,0.95);
-      border: 2px solid #0b6a8a;
+      background: rgba(17, 0, 255, 0.808);
+      border: 2px solid #3a9cbd;
       padding: 10px 18px;
       font-size: 1rem;
       border-radius: 50px;
