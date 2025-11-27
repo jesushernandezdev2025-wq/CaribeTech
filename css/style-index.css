@@ -134,10 +134,10 @@ body {
   100% { transform: scale(1); }
 }
 
-/* WIDGET DE HORA (arriba del boton de musica) */
-    .timezone-toggle {
-      position: fixed;
-  bottom: 95px;
+/* WIDGET DE HORA (arriba del botón de música) */
+.timezone-toggle {
+  position: fixed;
+  bottom: 95px; /* justo arriba del botón de música */
   right: 25px;
   background: linear-gradient(135deg, #d62626, #ff5e5e);
   color: #fff;
@@ -151,47 +151,70 @@ body {
   transition: transform 0.2s ease, background 0.3s ease;
 
   z-index: 999999999 !important; /* 🔥 SUPER ALTO */
+  animation: pulse 2s infinite; /* mismo efecto pulso */
 }
-    #timezoneBtn {
-      background: rgb(17, 0, 255);
-      border: 2px solid #1e799700;
-      padding: 10px 18px;
-      font-size: 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-      transition: transform .2s, background .2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #timezoneBtn:hover {
+
+/* Hover bonito */
+.timezone-toggle:hover {
   transform: scale(1.08);
   background: linear-gradient(135deg, #ff3b3b, #ff7979);
 }
 
-    .timezone-menu {
-      display: none;
-      position: absolute;
-      bottom: 60px;
-      right: 0;
-      background: #ffffffb6;
-      color: #000;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-      overflow: hidden;
-      min-width: 220px;
-    }
-    .timezone-menu button {
-      width: 100%;
-      padding: 10px 14px;
-      background: none;
-      border: none;
-      text-align: left;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .timezone-menu button:hover { background: #f2f2f2; }
+/* Botón interno */
+#timezoneBtn {
+  background: rgb(17, 0, 255);
+  border: 2px solid transparent;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform .2s, background .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Hover del botón interno */
+#timezoneBtn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #ff3b3b, #ff7979);
+}
+
+/* Menú desplegable */
+.timezone-menu {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: #ffffffb6;
+  color: #000;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.timezone-menu button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.timezone-menu button:hover {
+  background: #f2f2f2;
+}
+
+/* Reutilizamos la animación pulso */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
 
 
 :root {
