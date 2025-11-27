@@ -137,7 +137,7 @@ body {
 /* WIDGET DE HORA (arriba del boton de musica) */
     .timezone-toggle {
       position: fixed;
-      bottom: 95px; /* deja espacio sobre el botón de música */
+      bottom: 30px; /* deja espacio sobre el botón de música */
       right: 25px;
       z-index: 1000000000;
       font-family: inherit;
