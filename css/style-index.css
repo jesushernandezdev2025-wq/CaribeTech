@@ -1,5 +1,5 @@
 /* =====================================================
-   RESET Y BASE PROFESIONAL
+   RESET Y BASE GENERAL
    ===================================================== */
 * {
   margin: 0;
@@ -9,16 +9,21 @@
 
 body {
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: #ff0000;
-  color: #0E1A24;
-  line-height: 1.65;
+  background: #4b6e86;
+  color: #EAF5FF;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
+h1, h2 {
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor general */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 22px;
 }
 
 /* =====================================================
