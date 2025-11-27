@@ -179,27 +179,27 @@
   <script src="../js/script.js" defer></script>
   
   <!-- AUDIO AUTOMÁTICO OCULTO -->
-  <audio id="hero-audio" src="../audio/feliz navidad.mp3" autoplay loop></audio>
+  <audio id="hero-audio" src="../audio/navidad.mp3" autoplay loop></audio>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const audio = document.getElementById("hero-audio");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("hero-audio");
 
-      // Algunos navegadores bloquean el autoplay.
-      // Esto intenta reproducirlo de nuevo silenciosamente.
-      const tryPlay = () => {
-        audio.volume = 0.8; // volumen suave
-        audio.play().catch(() => {});
-      };
+  audio.volume = 0.7; // volumen 70%
 
-      tryPlay();
+  // Intento automático
+  audio.play().catch(() => {});
 
-      // Si el navegador lo bloquea, con el primer clic se activa.
-      document.addEventListener("click", () => {
-        tryPlay();
-      }, { once: true });
-    });
-  </script>
+  // Si el navegador lo bloquea, lo activamos con primer clic
+  function enableAudio() {
+    audio.play().catch(() => {});
+    document.removeEventListener("click", enableAudio);
+  }
+
+  document.addEventListener("click", enableAudio);
+});
+</script>
+
 
   <!-- Schema.org structured data para SEO -->
   <script type="application/ld+json">
