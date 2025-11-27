@@ -603,3 +603,59 @@ body {
 .feature-card::after {
   pointer-events: none;
 }
+
+/* =============================
+   WIDGET DE HORA
+============================= */
+.time-widget {
+  position: fixed;
+  bottom: 95px; /* arriba del botón de música */
+  right: 25px;
+  z-index: 999999999;
+}
+
+#timeButton {
+  background: #1d1d1d;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: background 0.3s, transform 0.2s;
+}
+
+#timeButton:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* Dropdown */
+.time-dropdown {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: #fff;
+  color: #000;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.time-dropdown button {
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.time-dropdown button:hover {
+  background: #f2f2f2;
+}
