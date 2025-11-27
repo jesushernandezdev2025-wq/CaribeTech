@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  z-index: 6000;
+  z-index: 1000;
   transition: all 0.3s ease;
 }
 
@@ -589,7 +589,7 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 9000;
 }
 
 /* Líneas del icono */
