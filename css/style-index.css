@@ -180,9 +180,6 @@ body {
     }
     .timezone-menu button:hover { background: #f2f2f2; }
 
-    /* Asegura que botones no sean tocados por header con alto z-index */
-    header, .header { z-index: 10; position: relative; }
-
 :root {
   --snow-color: white;
   --tree-color: rgba(255, 255, 255, 0.5);
