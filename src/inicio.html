@@ -175,12 +175,39 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+    <!-- Scripts -->
   <script src="../js/script.js" defer></script>
   
+  <!-- AUDIO AUTOMÁTICO OCULTO -->
+  <audio id="hero-audio" src="../audio/navidad.mp3" autoplay loop></audio>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const audio = document.getElementById("hero-audio");
+
+      // Algunos navegadores bloquean el autoplay.
+      // Esto intenta reproducirlo de nuevo silenciosamente.
+      const tryPlay = () => {
+        audio.volume = 0.8; // volumen suave
+        audio.play().catch(() => {});
+      };
+
+      tryPlay();
+
+      // Si el navegador lo bloquea, con el primer clic se activa.
+      document.addEventListener("click", () => {
+        tryPlay();
+      }, { once: true });
+    });
+  </script>
+
   <!-- Schema.org structured data para SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Caribe
+    "name": "CaribeTech"
+  }
+  </script>
+</body>
+</html>
