@@ -1,6 +1,6 @@
 /* =====================================================
    RESET Y BASE PROFESIONAL
-   ===================================================== */
+===================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -22,10 +22,11 @@ body {
 }
 
 /* =====================================================
-   HEADER FIJO CON MEJORAS
-   ===================================================== */
+   HEADER FIJO CON MENÚ RESPONSIVE
+===================================================== */
+
 .header {
-  position: relative;
+  position: relative; /* IMPORTANTE PARA EL MENÚ MÓVIL */
   top: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.582);
@@ -35,7 +36,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  z-index: 2000;
+  z-index: 5000; /* por encima del hero y decoraciones */
   transition: all 0.3s ease;
 }
 
@@ -53,9 +54,13 @@ body {
   width: auto;
   transition: transform 0.3s ease;
 }
-
 .logo img:hover {
   transform: scale(1.05);
+}
+
+.nav {
+  position: relative; /* NECESARIO PARA DROPDOWN MÓVIL */
+  z-index: 6000;
 }
 
 .nav ul {
@@ -80,12 +85,14 @@ body {
   border-color: #0B6A8A;
 }
 
+
 /* =====================================================
    HERO
-   ===================================================== */
+===================================================== */
+
 .hero {
   height: 100vh;
-  background: 
+  background:
     linear-gradient(135deg, rgba(194, 7, 7, 0.7), rgba(236, 103, 103, 0.7)),
     url("../img/hero-bg.jpg") center/cover no-repeat;
   display: flex;
@@ -98,7 +105,11 @@ body {
   overflow: hidden;
 }
 
-/* BOTÓN DE MÚSICA NAVIDEÑA */
+
+/* =====================================================
+   BOTÓN DE MÚSICA NAVIDEÑA (AJUSTADO)
+===================================================== */
+
 .music-toggle {
   position: fixed;
   bottom: 25px;
@@ -113,19 +124,13 @@ body {
   font-weight: bold;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   transition: transform 0.2s ease, background 0.3s ease;
-
-  z-index: 1000;
+  animation: pulse 2s infinite;
+  z-index: 3000; /* MÁS BAJO PARA NO BLOQUEAR EL MENÚ */
 }
 
-/* Hover bonito */
 .music-toggle:hover {
   transform: scale(1.08);
   background: linear-gradient(135deg, #ff3b3b, #ff7979);
-}
-
-/* efecto pulso */
-.music-toggle {
-  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -134,51 +139,69 @@ body {
   100% { transform: scale(1); }
 }
 
-/* WIDGET DE HORA (arriba del boton de musica) */
-    .timezone-toggle {
-      position: fixed;
-      bottom: 95px; /* deja espacio sobre el botón de música */
-      right: 25px;
-      z-index: 1000;
-      font-family: inherit;
-    }
-    #timezoneBtn {
-      background: rgb(17, 0, 255);
-      border: 2px solid #1e799700;
-      padding: 10px 18px;
-      font-size: 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-      transition: transform .2s, background .2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #timezoneBtn:hover { background: #0011ff; color: #fff; transform: scale(1.03); }
 
-    .timezone-menu {
-      display: none;
-      position: absolute;
-      bottom: 60px;
-      right: 0;
-      background: #ffffffb6;
-      color: #000;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-      overflow: hidden;
-      min-width: 220px;
-    }
-    .timezone-menu button {
-      width: 100%;
-      padding: 10px 14px;
-      background: none;
-      border: none;
-      text-align: left;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .timezone-menu button:hover { background: #f2f2f2; }
+/* =====================================================
+   WIDGET DE HORA
+===================================================== */
+
+.timezone-toggle {
+  position: fixed;
+  bottom: 95px;
+  right: 25px;
+  z-index: 3000;
+}
+
+#timezoneBtn {
+  background: rgb(17, 0, 255);
+  border: 2px solid #1e799700;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform .2s, background .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#timezoneBtn:hover {
+  background: #0011ff;
+  color: #fff;
+  transform: scale(1.03);
+}
+
+.timezone-menu {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: #ffffffb6;
+  color: #000;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.timezone-menu button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.timezone-menu button:hover {
+  background: #f2f2f2;
+}
+
+
+/* =====================================================
+   NIEVE Y ARBOLITOS
+===================================================== */
 
 :root {
   --snow-color: white;
@@ -186,9 +209,6 @@ body {
   --blur-snow: 1px;
 }
 
-/* ============================
-   NIEVE LIGERA — CAPAS SUAVES
-============================ */
 .snow {
   pointer-events: none;
   position: absolute;
@@ -218,7 +238,6 @@ body {
 .snow::before {
   animation: snowSlow 18s linear infinite;
 }
-
 .snow::after {
   animation: snowSlow 28s linear infinite;
   opacity: 0.6;
@@ -229,9 +248,6 @@ body {
   to   { transform: translateY(110%); }
 }
 
-/* ============================
-   ARBOLITOS CAYENDO
-============================ */
 .trees-falling {
   pointer-events: none;
   position: absolute;
@@ -252,6 +268,10 @@ body {
   100% { background-position: 0 110%; }
 }
 
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
 
 .hero-decoration {
   position: absolute;
@@ -307,9 +327,11 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+
 /* =====================================================
    FEATURES
-   ===================================================== */
+===================================================== */
+
 .features {
   padding: 90px 40px;
   background: #ffffff;
@@ -352,9 +374,9 @@ body {
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
+  z-index: 1;
 }
 
-/* Borde animado */
 .feature-card::before {
   content: '';
   position: absolute;
@@ -362,11 +384,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, 
-    transparent 30%, 
-    rgb(0, 140, 255) 50%, 
-    transparent 70%
-  );
+  background: linear-gradient(45deg, transparent 30%, rgb(0, 140, 255) 50%, transparent 70%);
   border-radius: 14px;
   animation: rotateBorder 2s linear infinite;
   z-index: -1;
@@ -433,9 +451,11 @@ body {
   color: #0F8D77;
 }
 
+
 /* =====================================================
    FOOTER
-   ===================================================== */
+===================================================== */
+
 .footer {
   background: #0E1A24;
   color: #F7F9FA;
@@ -467,9 +487,11 @@ body {
   color: #0F8D77;
 }
 
+
 /* =====================================================
    ANIMACIONES
-   ===================================================== */
+===================================================== */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -482,134 +504,42 @@ body {
 }
 
 @keyframes rotateBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
+
 
 /* =====================================================
-   RESPONSIVE
-   ===================================================== */
-@media (max-width: 900px) {
-  .nav ul {
-    display: none;
-  }
-}
+   MENÚ MÓVIL — FUNCIONAL 100%
+===================================================== */
 
-@media (max-width: 620px) {
-  .hero-content h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 490px) {
-  .logo img {
-    width: 200px;
-  }
-
-  .intro p {
-    font-size: 1rem;
-  }
-}
-
-/* --- Testimonios --- */
-.testimonials {
-  padding: 80px 20px;
-  background: #0d1a23; /* azul agua ultra oscuro */
-  color: #e8f4ff;
-}
-
-.testimonials-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2.3rem;
-  margin-bottom: 40px;
-  background: linear-gradient(90deg, #4ac2dd, #79e0ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.testimonial-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 25px 30px;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(3px);
-  text-align: left;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 170, 220, 0.15);
-}
-
-.testimonial-text {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #d9f4ff;
-  margin-bottom: 12px;
-}
-
-.testimonial-author {
-  font-size: 0.95rem;
-  color: #8ecbe5;
-  font-style: normal;
-  font-weight: 600;
-}
-
-/* =====================================================
-   MENÚ MÓVIL — Versión limpia y profesional
-   ===================================================== */
-
-/* Contenedor del botón hamburguesa */
+/* Botón hamburguesa */
 .mobile-menu-toggle {
-  display: none; /* Oculto en escritorio */
+  display: none;
   flex-direction: column;
   gap: 6px;
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
-  z-index: 9500;
+  z-index: 7000;
 }
 
-/* Líneas del icono */
 .hamburger-line {
   display: block;
   width: 26px;
   height: 3px;
   background-color: #0E1A24;
-  border: none;
-  outline: none;
   border-radius: 2px;
   transition: 0.3s ease;
 }
 
-/* Menú móvil */
+/* Estilo del menú móvil ABIERTO */
 .nav ul.nav-open {
   display: flex !important;
   flex-direction: column;
   gap: 20px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.95);
   position: absolute;
   top: 100%;
   left: 0;
@@ -619,9 +549,9 @@ body {
   border-bottom: 1px solid rgba(0,0,0,0.12);
   backdrop-filter: blur(8px);
   animation: slideDown 0.35s ease forwards;
+  z-index: 9000; /* POR ENCIMA DE TODO */
 }
 
-/* Animación suave hacia abajo */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -633,21 +563,37 @@ body {
   }
 }
 
-/* Mostrar menú solo en móvil */
+/* Activar menú solo en móvil */
 @media (max-width: 900px) {
-  .nav ul {
-    display: none; /* Oculto hasta que se active */
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
+  .nav ul { display: none; }
+  .mobile-menu-toggle { display: flex; }
 }
 
-/* Asegurar que las pseudo-capas de las tarjetas no afecten el menú */
+/* Evitar problemas con las tarjetas */
 .feature-card::before,
 .feature-card::after {
   pointer-events: none;
 }
 
 
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 620px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .logo img {
+    width: 200px;
+  }
+  .intro p {
+    font-size: 1rem;
+  }
+}
