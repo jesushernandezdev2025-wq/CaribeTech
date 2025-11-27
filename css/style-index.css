@@ -137,7 +137,7 @@ body {
 /* WIDGET DE HORA (arriba del botón de música) */
 .timezone-toggle {
   position: fixed;
-  bottom: 95px; /* justo arriba del botón de música */
+  bottom: 125px; /* justo arriba del botón de música */
   right: 25px;
   background: linear-gradient(135deg, #d62626, #ff5e5e);
   color: #fff;
@@ -173,6 +173,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+/* Hover del botón interno */
+#timezoneBtn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #ff3b3b, #ff7979);
 }
 
 /* Menú desplegable */
