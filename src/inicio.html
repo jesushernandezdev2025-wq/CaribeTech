@@ -178,15 +178,18 @@
     <!-- Scripts -->
   <script src="../js/script.js" defer></script>
   
- <audio id="hero-audio" src="audio/navidad.mp3" preload="auto" loop></audio>
+ <!-- AUDIO AUTOMÁTICO -->
+<audio id="hero-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("hero-audio");
   audio.volume = 0.7;
 
+  // Intento automático
   audio.play().catch(() => {});
 
+  // Si el navegador lo bloquea, lo activamos con el primer clic
   const enableAudio = () => {
     audio.play().catch(() => {});
     document.removeEventListener("click", enableAudio);
@@ -195,8 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", enableAudio);
 });
 </script>
-
-
 
   <!-- Schema.org structured data para SEO -->
   <script type="application/ld+json">
