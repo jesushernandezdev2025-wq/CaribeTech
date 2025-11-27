@@ -114,7 +114,7 @@ body {
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   transition: transform 0.2s ease, background 0.3s ease;
 
-  z-index: 999999999 !important; /* 🔥 SUPER ALTO */
+  z-index: 5000;
 }
 
 /* Hover bonito */
@@ -139,7 +139,7 @@ body {
       position: fixed;
       bottom: 95px; /* deja espacio sobre el botón de música */
       right: 25px;
-      z-index: 999999999;
+      z-index: 5000;
       font-family: inherit;
     }
     #timezoneBtn {
