@@ -63,6 +63,12 @@
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
     </button>
+
+    <!-- BOTÓN FLOTANTE PARA ACTIVAR MÚSICA -->
+<button id="music-btn" class="music-toggle" aria-label="Activar música navideña">
+  🎄 Música
+</button>
+
   </header>
 
   <main>
@@ -177,25 +183,30 @@
 
     <!-- Scripts -->
   <script src="../js/script.js" defer></script>
-  
- <!-- AUDIO AUTOMÁTICO -->
-<audio id="hero-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
+
+
+<!-- AUDIO -->
+<audio id="navidad-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("hero-audio");
-  audio.volume = 0.5;
+  const audio = document.getElementById("navidad-audio");
+  const btn = document.getElementById("music-btn");
 
-  // Intento automático
-  audio.play().catch(() => {});
+  let playing = false;
 
-  // Si el navegador lo bloquea, lo activamos con el primer clic
-  const enableAudio = () => {
-    audio.play().catch(() => {});
-    document.removeEventListener("click", enableAudio);
-  };
-
-  document.addEventListener("click", enableAudio);
+  btn.addEventListener("click", () => {
+    if (!playing) {
+      audio.volume = 0.7;
+      audio.play().catch(() => {});
+      btn.textContent = "⏸️ Pausar música";
+      playing = true;
+    } else {
+      audio.pause();
+      btn.textContent = "🎄 Música";
+      playing = false;
+    }
+  });
 });
 </script>
 
