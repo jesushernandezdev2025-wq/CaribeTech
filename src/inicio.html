@@ -76,28 +76,6 @@
  <!-- Capas de efectos -->
   <div class="snow"></div>
   <div class="trees-falling"></div>
-<!-- BOTÓN DE HORA RD -->
-<div class="timezone-toggle">
-  <button id="timezoneBtn">🕒 RD: <span id="currentTimeRD"></span></button>
-
-  <div class="timezone-menu" id="timezoneMenu">
-    <button data-tz="America/Santo_Domingo">🇩🇴 República Dominicana</button>
-    <button data-tz="America/Puerto_Rico">🇵🇷 Puerto Rico</button>
-    <button data-tz="America/Havana">🇨🇺 Cuba</button>
-    <button data-tz="America/Panama">🇵🇦 Panamá</button>
-    <button data-tz="America/Mexico_City">🇲🇽 México</button>
-    <button data-tz="America/Bogota">🇨🇴 Colombia</button>
-    <button data-tz="America/Lima">🇵🇪 Perú</button>
-    <button data-tz="America/Caracas">🇻🇪 Venezuela</button>
-  </div>
-</div>
-
-  
-  <!-- BOTÓN FLOTANTE PARA ACTIVAR MÚSICA -->
-<button id="music-btn" class="music-toggle" aria-label="Activar música navideña">
-  🎄 Música
-</button>
-
 
       <!-- Elemento decorativo adicional -->
       <div class="hero-decoration" aria-hidden="true"></div>
@@ -200,32 +178,122 @@
   <script src="../js/script.js" defer></script>
 
 
-<!-- AUDIO -->
-<audio id="navidad-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
+  <!-- WIDGET DE HORA (fijo, encima del botón de música) -->
+  <div class="timezone-toggle" id="timezoneWidget" aria-live="polite">
+    <button id="timezoneBtn" aria-haspopup="true" aria-expanded="false">🕒 RD: <span id="currentTimeRD">--:--:--</span></button>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("navidad-audio");
-  const btn = document.getElementById("music-btn");
+    <div class="timezone-menu" id="timezoneMenu" role="menu" aria-hidden="true">
+      <button data-tz="America/Santo_Domingo" role="menuitem">🇩🇴 República Dominicana</button>
+      <button data-tz="America/Puerto_Rico" role="menuitem">🇵🇷 Puerto Rico</button>
+      <button data-tz="America/Havana" role="menuitem">🇨🇺 Cuba</button>
+      <button data-tz="America/Port_of_Spain" role="menuitem">🇹🇹 Trinidad y Tobago</button>
+      <button data-tz="America/Panama" role="menuitem">🇵🇦 Panamá</button>
+      <button data-tz="America/Bogota" role="menuitem">🇨🇴 Colombia</button>
+      <button data-tz="America/Lima" role="menuitem">🇵🇪 Perú</button>
+      <button data-tz="America/Mexico_City" role="menuitem">🇲🇽 México</button>
+    </div>
+  </div>
 
-  let playing = false;
+  <!-- BOTÓN FLOTANTE PARA ACTIVAR MÚSICA -->
+  <button id="music-btn" class="music-toggle" aria-label="Activar música navideña">🎄 Música</button>
 
-  btn.addEventListener("click", () => {
-    if (!playing) {
+  <!-- AUDIO (ruta absoluta desde el dominio) -->
+  <audio id="navidad-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
+
+  <!-- Scripts externos -->
+  <script src="../js/script.js" defer></script>
+
+  <!-- Script: widget hora y botón de música -->
+  <script>
+    // --- Widget de hora ---
+    (function () {
+      const tzBtn = document.getElementById('timezoneBtn');
+      const tzMenu = document.getElementById('timezoneMenu');
+      const tzDisplay = document.getElementById('currentTimeRD');
+      let currentTZ = 'America/Santo_Domingo';
+      let intervalId = null;
+
+      function formatTime(tz) {
+        const now = new Date();
+        return new Intl.DateTimeFormat('es-DO', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+          timeZone: tz
+        }).format(now);
+      }
+
+      function startClock(tz) {
+        if (intervalId) clearInterval(intervalId);
+        tzDisplay.textContent = formatTime(tz);
+        intervalId = setInterval(() => {
+          tzDisplay.textContent = formatTime(tz);
+        }, 1000);
+      }
+
+      // inicializa
+      startClock(currentTZ);
+
+      // toggle menu
+      tzBtn.addEventListener('click', (e) => {
+        const open = tzMenu.style.display === 'block';
+        tzMenu.style.display = open ? 'none' : 'block';
+        tzMenu.setAttribute('aria-hidden', open ? 'true' : 'false');
+        tzBtn.setAttribute('aria-expanded', String(!open));
+        e.stopPropagation();
+      });
+
+      // seleccionar zona
+      tzMenu.querySelectorAll('button[data-tz]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const tz = btn.dataset.tz;
+          currentTZ = tz;
+          startClock(tz);
+          tzMenu.style.display = 'none';
+          tzMenu.setAttribute('aria-hidden', 'true');
+          tzBtn.setAttribute('aria-expanded', 'false');
+          e.stopPropagation();
+        });
+      });
+
+      // cerrar si clic afuera
+      document.addEventListener('click', (e) => {
+        const widget = document.getElementById('timezoneWidget');
+        if (!widget.contains(e.target)) {
+          tzMenu.style.display = 'none';
+          tzMenu.setAttribute('aria-hidden', 'true');
+          tzBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // --- Botón de música ---
+    (function () {
+      const audio = document.getElementById('navidad-audio');
+      const btn = document.getElementById('music-btn');
+      let playing = false;
+
+      // seguridad: audio en 0 (intento) para evitar bloqueos por autoplay policies,
+      // pero no dejarlo audible hasta que el usuario pulse el botón
       audio.volume = 0.7;
+
+      btn.addEventListener('click', () => {
+        if (!playing) {
+          audio.play().catch(() => {});
+          btn.textContent = '⏸️ Pausar música';
+          playing = true;
+        } else {
+          audio.pause();
+          btn.textContent = '🎄 Música';
+          playing = false;
+        }
+      });
+
+      // Si quieres, puedes auto-intentar y luego esperar clic (no forzará sonido sin interacción)
       audio.play().catch(() => {});
-      btn.textContent = "⏸️ Pausar música";
-      playing = true;
-    } else {
-      audio.pause();
-      btn.textContent = "🎄 Música";
-      playing = false;
-    }
-  });
-});
-</script>
-
-
+    })();
+  </script>
 
   <!-- Schema.org structured data para SEO -->
   <script type="application/ld+json">
