@@ -175,12 +175,6 @@ body {
   gap: 8px;
 }
 
-/* Hover del botón interno */
-#timezoneBtn:hover {
-  transform: scale(1.08);
-  background: linear-gradient(135deg, #ff3b3b, #ff7979);
-}
-
 /* Menú desplegable */
 .timezone-menu {
   display: none;
