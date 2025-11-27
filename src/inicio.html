@@ -178,23 +178,22 @@
     <!-- Scripts -->
   <script src="../js/script.js" defer></script>
   
-  <!-- AUDIO AUTOMÁTICO OCULTO -->
-  <audio id="hero-audio" src="../audio/navidad.mp3" autoplay loop></audio>
+ <audio id="hero-audio" src="../audio/navidad.mp3" preload="auto" loop></audio>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("hero-audio");
 
-  audio.volume = 0.7; // volumen 70%
+  audio.volume = 0.7; // 70%
 
   // Intento automático
   audio.play().catch(() => {});
 
-  // Si el navegador lo bloquea, lo activamos con primer clic
-  function enableAudio() {
+  // Reproducción al primer clic si el navegador bloquea autoplay
+  const enableAudio = () => {
     audio.play().catch(() => {});
     document.removeEventListener("click", enableAudio);
-  }
+  };
 
   document.addEventListener("click", enableAudio);
 });
