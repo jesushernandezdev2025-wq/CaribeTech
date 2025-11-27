@@ -134,6 +134,54 @@ body {
   100% { transform: scale(1); }
 }
 
+/* WIDGET DE HORA (arriba del boton de musica) */
+    .timezone-toggle {
+      position: fixed;
+      bottom: 95px; /* deja espacio sobre el botón de música */
+      right: 25px;
+      z-index: 999999999;
+      font-family: inherit;
+    }
+    #timezoneBtn {
+      background: rgb(17, 0, 255);
+      border: 2px solid #1e799700;
+      padding: 10px 18px;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: transform .2s, background .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #timezoneBtn:hover { background: #0011ff; color: #fff; transform: scale(1.03); }
+
+    .timezone-menu {
+      display: none;
+      position: absolute;
+      bottom: 60px;
+      right: 0;
+      background: #ffffffb6;
+      color: #000;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      overflow: hidden;
+      min-width: 220px;
+    }
+    .timezone-menu button {
+      width: 100%;
+      padding: 10px 14px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .timezone-menu button:hover { background: #f2f2f2; }
+
+    /* Asegura que botones no sean tocados por header con alto z-index */
+    header, .header { z-index: 10; position: relative; }
 
 :root {
   --snow-color: white;
