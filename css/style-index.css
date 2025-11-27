@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  z-index: 1000;
+  z-index: 1000000000;
   transition: all 0.3s ease;
 }
 
@@ -100,7 +100,7 @@ body {
 
 /* BOTÓN DE MÚSICA NAVIDEÑA */
 .music-toggle {
-  position: fixed;
+  position: absolute;
   bottom: 25px;
   right: 25px;
   background: linear-gradient(135deg, #d62626, #ff5e5e);
@@ -136,16 +136,20 @@ body {
 
 /* WIDGET DE HORA (arriba del boton de musica) */
     .timezone-toggle {
-      position: fixed;
+      position: absolute;
       bottom: 95px; /* deja espacio sobre el botón de música */
       right: 25px;
       z-index: 999999999;
       font-family: inherit;
+      
     }
     #timezoneBtn {
-      background: rgb(17, 0, 255);
-      border: 2px solid #1e799700;
+      background: linear-gradient(135deg, #d62626, #ff5e5e);
+      color: #fff;
+      border: 1px solid #d4d9dd00;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
       padding: 10px 18px;
+      font-weight: bold;
       font-size: 1rem;
       border-radius: 50px;
       cursor: pointer;
@@ -154,8 +158,9 @@ body {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      animation: pulse 2s infinite;
     }
-    #timezoneBtn:hover { background: #0011ff; color: #fff; transform: scale(1.03); }
+    #timezoneBtn:hover { background: linear-gradient(135deg, #ff3b3b, #ff7979); }
 
     .timezone-menu {
       display: none;
@@ -178,7 +183,57 @@ body {
       font-size: 14px;
       cursor: pointer;
     }
-    .timezone-menu button:hover { background: #f2f2f2; }
+    .timezone-menu button:hover { background: #f2f2f29c; }
+
+/* WIDGET DE CLIMA */
+.clima-toggle {
+  position: absolute;
+  bottom: 165px; /* 🔥 encima del widget de hora */
+  right: 25px;
+  z-index: 999999999;
+}
+
+/* Botón */
+#climaBtn {
+  background: linear-gradient(135deg, #d62626, #ff5e5e);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  animation: pulse 2s infinite;
+}
+
+#climaBtn:hover { background: linear-gradient(135deg, #ff3b3b, #ff7979); }
+
+/* Menú */
+.clima-menu {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background: #ffffffd0;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.clima-menu button {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clima-menu button:hover {
+  background: #f2f2f29c;
+}
 
 :root {
   --snow-color: white;

@@ -79,6 +79,53 @@
 
       <!-- Elemento decorativo adicional -->
       <div class="hero-decoration" aria-hidden="true"></div>
+
+      <!-- CONTENEDOR DE WIDGETS FIJOS EN EL HERO -->
+<div class="hero-widgets">
+
+  <!-- WIDGET DE CLIMA -->
+  <div class="clima-toggle">
+    <button id="climaBtn" aria-haspopup="true" aria-expanded="false">
+      ⛅ RD: <span id="tempPrincipal">--°C</span>
+    </button>
+
+    <div class="clima-menu" id="climaMenu" role="menu" aria-hidden="true">
+      <button data-lat="18.4861" data-lon="-69.9312" data-code="RD" data-flag="🇩🇴">🇩🇴 República Dominicana</button>
+      <button data-lat="18.2208" data-lon="-66.5901" data-code="PR" data-flag="🇵🇷">🇵🇷 Puerto Rico</button>
+      <button data-lat="23.1136" data-lon="-82.3666" data-code="CU" data-flag="🇨🇺">🇨🇺 Cuba</button>
+      <button data-lat="10.6667" data-lon="-61.5167" data-code="TT" data-flag="🇹🇹">🇹🇹 Trinidad y Tobago</button>
+      <button data-lat="9.0000" data-lon="-79.5000" data-code="PA" data-flag="🇵🇦">🇵🇦 Panamá</button>
+      <button data-lat="4.7110" data-lon="-74.0721" data-code="CO" data-flag="🇨🇴">🇨🇴 Colombia</button>
+      <button data-lat="12.0464" data-lon="-77.0428" data-code="PE" data-flag="🇵🇪">🇵🇪 Perú</button>
+      <button data-lat="19.4326" data-lon="-99.1332" data-code="MX" data-flag="🇲🇽">🇲🇽 México</button>
+    </div>
+  </div>
+
+  <!-- WIDGET DE HORA -->
+  <div class="timezone-toggle" id="timezoneWidget" aria-live="polite">
+    <button id="timezoneBtn" aria-haspopup="true" aria-expanded="false">
+      🕒 <span id="tzAbbr">RD</span>: <span id="currentTime">--:--:--</span>
+    </button>
+
+    <div class="timezone-menu" id="timezoneMenu" role="menu" aria-hidden="true">
+      <button data-tz="America/Santo_Domingo" data-abbr="RD">🇩🇴 República Dominicana</button>
+      <button data-tz="America/Puerto_Rico" data-abbr="PR">🇵🇷 Puerto Rico</button>
+      <button data-tz="America/Havana" data-abbr="CU">🇨🇺 Cuba</button>
+      <button data-tz="America/Port_of_Spain" data-abbr="TT">🇹🇹 Trinidad y Tobago</button>
+      <button data-tz="America/Panama" data-abbr="PA">🇵🇦 Panamá</button>
+      <button data-tz="America/Bogota" data-abbr="CO">🇨🇴 Colombia</button>
+      <button data-tz="America/Lima" data-abbr="PE">🇵🇪 Perú</button>
+      <button data-tz="America/Mexico_City" data-abbr="MX">🇲🇽 México</button>
+    </div>
+  </div>
+
+  <!-- BOTÓN DE MÚSICA -->
+  <button id="music-btn" class="music-toggle" aria-label="Activar música navideña">
+    🎄 Música
+  </button>
+
+</div>
+
     </section>
 
     <!-- FEATURES -->
@@ -174,25 +221,6 @@
     </div>
   </footer>
 
-  <!-- WIDGET DE HORA (fijo, encima del botón de música) -->
-<div class="timezone-toggle" id="timezoneWidget" aria-live="polite">
-  <button id="timezoneBtn" aria-haspopup="true" aria-expanded="false">
-  🕒 <span id="tzAbbr">RD</span>: <span id="currentTime">--:--:--</span>
-</button>
-
-<div class="timezone-menu" id="timezoneMenu" role="menu" aria-hidden="true">
-  <button data-tz="America/Santo_Domingo" data-abbr="RD">🇩🇴 República Dominicana</button>
-  <button data-tz="America/Puerto_Rico" data-abbr="PR">🇵🇷 Puerto Rico</button>
-  <button data-tz="America/Havana" data-abbr="CU">🇨🇺 Cuba</button>
-  <button data-tz="America/Port_of_Spain" data-abbr="TT">🇹🇹 Trinidad y Tobago</button>
-  <button data-tz="America/Panama" data-abbr="PA">🇵🇦 Panamá</button>
-  <button data-tz="America/Bogota" data-abbr="CO">🇨🇴 Colombia</button>
-  <button data-tz="America/Lima" data-abbr="PE">🇵🇪 Perú</button>
-  <button data-tz="America/Mexico_City" data-abbr="MX">🇲🇽 México</button>
-</div>
-
-<!-- BOTÓN FLOTANTE PARA ACTIVAR MÚSICA -->
-<button id="music-btn" class="music-toggle" aria-label="Activar música navideña">🎄 Música</button>
 
 <!-- AUDIO -->
 <audio id="navidad-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
@@ -294,4 +322,53 @@
       }
     });
   })();
+
+  async function obtenerClima(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.current_weather.temperature;
+}
+
+const climaBtn = document.getElementById("climaBtn");
+const climaMenu = document.getElementById("climaMenu");
+const tempPrincipal = document.getElementById("tempPrincipal");
+
+// Abrir menú
+climaBtn.addEventListener("click", () => {
+  const open = climaMenu.style.display === "block";
+  climaMenu.style.display = open ? "none" : "block";
+});
+
+// Cerrar si clic fuera
+document.addEventListener("click", (e) => {
+  if (!climaBtn.contains(e.target) && !climaMenu.contains(e.target)) {
+    climaMenu.style.display = "none";
+  }
+});
+
+// Al iniciar: poner clima de RD automáticamente
+(async () => {
+  const rdTemp = await obtenerClima(18.4861, -69.9312);
+  tempPrincipal.textContent = `${rdTemp}°C`;
+})();
+
+// Cuando selecciones un país
+climaMenu.querySelectorAll("button").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const lat = btn.dataset.lat;
+    const lon = btn.dataset.lon;
+    const code = btn.dataset.code;
+    const flag = btn.dataset.flag;
+
+    const temp = await obtenerClima(lat, lon);
+
+    // Cambiar el botón principal
+    climaBtn.innerHTML = `${flag} ${code}: <span>${temp}°C</span>`;
+
+    // Cerrar menú
+    climaMenu.style.display = "none";
+  });
+});
+
 </script>
