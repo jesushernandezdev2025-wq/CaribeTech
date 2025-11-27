@@ -8,7 +8,7 @@
   <meta name="author" content="CaribeTech">
   <title>CaribeTech - Innovación Digital en Latinoamérica</title>
 
-  <!-- Preconexión para mejorar rendimiento -->
+  <!-- Preconexión -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -16,9 +16,9 @@
   <link rel="stylesheet" href="../css/style-index.css">
 
   <!-- Iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://caribetech.com/">
   <meta property="og:title" content="CaribeTech - Innovación Digital">
@@ -38,31 +38,36 @@
 
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER CORREGIDO -->
   <header class="header" role="banner">
-    <div class="logo">
-      <a href="inicio.html" aria-label="CaribeTech Inicio">
-        <img src="../img/Navidad/CaribeTech - Navideño png.png" alt="Logo CaribeTech" width="180" height="50" loading="lazy">
+    <div class="header-container">
+
+      <!-- LOGO -->
+      <a href="inicio.html" class="logo" aria-label="CaribeTech Inicio">
+        <img src="../img/Navidad/CaribeTech - Navideño png.png" 
+             alt="Logo CaribeTech" width="180" height="50" loading="lazy">
       </a>
+
+      <!-- BOTÓN MENÚ MÓVIL -->
+      <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <!-- NAVEGACIÓN -->
+      <nav class="nav" role="navigation" aria-label="Navegación principal">
+        <ul>
+          <li><a href="inicio.html" class="active" aria-current="page">Inicio</a></li>
+          <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+          <li><a href="aplicacion.html">Aplicaciones</a></li>
+          <li><a href="tiktok.html">TikTok</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="colaboracion.html">Colaboración</a></li>
+        </ul>
+      </nav>
+
     </div>
-
-    <nav class="nav" role="navigation" aria-label="Navegación principal">
-      <ul>
-        <li><a href="inicio.html" class="active" aria-current="page">Inicio</a></li>
-        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
-        <li><a href="aplicacion.html">Aplicaciones</a></li>
-        <li><a href="tiktok.html">TikTok</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="colaboracion.html">Colaboración</a></li>
-      </ul>
-    </nav>
-
-    <!-- Botón menú móvil (mejora accesibilidad) -->
-    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
   </header>
 
   <main>

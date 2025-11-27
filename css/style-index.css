@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: #ff0000;
   color: #0E1A24;
   line-height: 1.65;
   overflow-x: hidden;
@@ -25,7 +25,7 @@ body {
    HEADER FIJO CON MEJORAS
    ===================================================== */
 .header {
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.582);
@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  z-index: 1000;
+  z-index: 2000;
   transition: all 0.3s ease;
 }
 
@@ -86,33 +86,120 @@ body {
 .hero {
   height: 100vh;
   background: 
-    linear-gradient(135deg, rgba(138, 11, 11, 0.7), rgba(121, 27, 27, 0.7)),
+    linear-gradient(135deg, rgba(194, 7, 7, 0.7), rgba(236, 103, 103, 0.7)),
     url("../img/hero-bg.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  color: #F7F9FA;
+  color: #faf7f7;
   position: relative;
   overflow: hidden;
 }
 
-/* =====================================================
-   NIEVE LIGERA — POCAS PARTÍCULAS GRANDES Y SUAVES
-===================================================== */
+/* BOTÓN DE MÚSICA NAVIDEÑA */
+.music-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #d62626, #ff5e5e);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, background 0.3s ease;
 
+  z-index: 1000;
+}
+
+/* Hover bonito */
+.music-toggle:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #ff3b3b, #ff7979);
+}
+
+/* efecto pulso */
+.music-toggle {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* WIDGET DE HORA (arriba del boton de musica) */
+    .timezone-toggle {
+      position: fixed;
+      bottom: 95px; /* deja espacio sobre el botón de música */
+      right: 25px;
+      z-index: 1000;
+      font-family: inherit;
+    }
+    #timezoneBtn {
+      background: rgb(17, 0, 255);
+      border: 2px solid #1e799700;
+      padding: 10px 18px;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: transform .2s, background .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #timezoneBtn:hover { background: #0011ff; color: #fff; transform: scale(1.03); }
+
+    .timezone-menu {
+      display: none;
+      position: absolute;
+      bottom: 60px;
+      right: 0;
+      background: #ffffffb6;
+      color: #000;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      overflow: hidden;
+      min-width: 220px;
+    }
+    .timezone-menu button {
+      width: 100%;
+      padding: 10px 14px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .timezone-menu button:hover { background: #f2f2f2; }
+
+:root {
+  --snow-color: white;
+  --tree-color: rgba(255, 255, 255, 0.5);
+  --blur-snow: 1px;
+}
+
+/* ============================
+   NIEVE LIGERA — CAPAS SUAVES
+============================ */
 .snow {
   pointer-events: none;
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.snow::before {
+.snow::before,
+.snow::after {
   content: "";
   position: absolute;
   width: 120%;
@@ -120,23 +207,21 @@ body {
   top: -10%;
   left: -10%;
   background-image:
-    radial-gradient(white 4px, transparent 4px),
-    radial-gradient(white 3px, transparent 3px),
-    radial-gradient(white 6px, transparent 6px);
+    radial-gradient(var(--snow-color) 4px, transparent 4px),
+    radial-gradient(var(--snow-color) 3px, transparent 3px),
+    radial-gradient(var(--snow-color) 6px, transparent 6px);
+  background-size: 80px 80px, 120px 120px, 150px 150px;
+  opacity: 0.8;
+  filter: blur(var(--blur-snow));
+}
 
-  background-size: 
-    80px 80px, 
-    120px 120px, 
-    150px 150px;
-
-  background-position:
-    0 0,
-    40px -20px,
-    -30px 30px;
-
-  opacity: 0.9;
+.snow::before {
   animation: snowSlow 18s linear infinite;
-  filter: blur(0.5px);
+}
+
+.snow::after {
+  animation: snowSlow 28s linear infinite;
+  opacity: 0.6;
 }
 
 @keyframes snowSlow {
@@ -144,39 +229,27 @@ body {
   to   { transform: translateY(110%); }
 }
 
-/* =====================================================
-   ARBOLITOS CAYENDO — POCOS, GRANDES, LENTOS
-===================================================== */
-
+/* ============================
+   ARBOLITOS CAYENDO
+============================ */
 .trees-falling {
   pointer-events: none;
   position: absolute;
-  top: -20%;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-repeat: repeat;
-  background-size: 160px;
-  opacity: 0.9;
-
-  /* Árbol navideño blanco con forma bonita */
+  background-size: 163px;
+  opacity: 0.7;
   background-image: url("data:image/svg+xml;utf8,\
-    <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 64 64'>\
-      <polygon points='32,0 14,24 22,24 16,32 26,32 20,44 30,44 24,64 40,64 34,44 44,44 38,32 48,32 42,24 50,24' fill=\"white\"/>\
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>\
+      <polygon points='32,0 14,24 22,24 16,32 26,32 20,44 30,44 24,64 40,64 34,44 44,44 38,32 48,32 42,24 50,24' fill='white'/>\
     </svg>");
-  
-  animation: treesFall 25s linear infinite;
-  filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+  animation: treesFall 30s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
 }
 
-/* Animación lenta cayendo */
 @keyframes treesFall {
-  0% {
-    background-position: 0 -200px;
-  }
-  100% {
-    background-position: 0 110%;
-  }
+  0% { background-position: 0 -200px; }
+  100% { background-position: 0 110%; }
 }
 
 
@@ -516,7 +589,7 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 9500;
 }
 
 /* Líneas del icono */
