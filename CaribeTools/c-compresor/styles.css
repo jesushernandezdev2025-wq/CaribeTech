@@ -64,6 +64,17 @@ body {
   border-color: rgba(112,214,255,0.5);
 }
 
+.ad-header {
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /* =========================
    CONTENEDOR PRINCIPAL
 ========================= */
