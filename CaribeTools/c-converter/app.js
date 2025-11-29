@@ -3,72 +3,85 @@ const fileInput = document.getElementById("fileInput");
 const conversionType = document.getElementById("conversionType");
 const statusBox = document.getElementById("status");
 
-const API_SECRET = "rKw9hUoGDXbHnGyYo7fdwyas577q4xwC"; // tu clave real
-const BASE_URL = "https://v2.convertapi.com/convert";
+const conversions = {
+  "pdf-to-docx": { input: "pdf", output: "docx" },
+  "docx-to-pdf": { input: "docx", output: "pdf" },
+  "pdf-to-png": { input: "pdf", output: "png" },
+  "img-to-pdf": { input: "jpg", output: "pdf" }, 
+  "pdf-to-xlsx": { input: "pdf", output: "xlsx" },
+  "xlsx-to-pdf": { input: "xlsx", output: "pdf" },
+  "ppt-to-pdf": { input: "pptx", output: "pdf" },
+  "pdf-to-ppt": { input: "pdf", output: "pptx" },
+  "img-to-webp": { input: "jpg", output: "webp" },
+  "txt-to-pdf": { input: "txt", output: "pdf" }
+};
 
 async function convertFile() {
   const file = fileInput.files[0];
+
   if (!file) {
     statusBox.textContent = "⚠️ Selecciona un archivo primero.";
     return;
   }
 
-  statusBox.textContent = `⏳ Convirtiendo (${conversionType.value})…`;
-
-  let endpoint = "";
-  switch (conversionType.value) {
-    case "pdf-to-docx": endpoint = "pdf/to/docx"; break;
-    case "docx-to-pdf": endpoint = "docx/to/pdf"; break;
-    case "pdf-to-png": endpoint = "pdf/to/png"; break;
-    case "img-to-pdf": endpoint = "jpg/to/pdf"; break;
-    case "pdf-to-xlsx": endpoint = "pdf/to/xlsx"; break;
-    case "xlsx-to-pdf": endpoint = "xlsx/to/pdf"; break;
-    case "ppt-to-pdf": endpoint = "pptx/to/pdf"; break;
-    case "pdf-to-ppt": endpoint = "pdf/to/pptx"; break;
-    case "img-to-webp": endpoint = "jpg/to/webp"; break;
-    case "txt-to-pdf": endpoint = "txt/to/pdf"; break;
-    default:
-      statusBox.textContent = "❌ Tipo de conversión no soportado.";
-      return;
+  const type = conversions[conversionType.value];
+  if (!type) {
+    statusBox.textContent = "❌ Tipo de conversión no soportado.";
+    return;
   }
 
-  const formData = new FormData();
-  formData.append("File", file);
+  statusBox.textContent = `⏳ Subiendo archivo…`;
 
   try {
-    // OJO: el parámetro es "secret" en minúsculas
-    const res = await fetch(`${BASE_URL}/${endpoint}?secret=${API_SECRET}`, {
+    // 1. Crear tarea
+    const jobRes = await fetch("https://api.convertio.co/convert", {
       method: "POST",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: "upload",
+        file: file.name,
+        convertto: type.output
+      })
     });
 
-    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+    const job = await jobRes.json();
+    const jobId = job.data.id;
 
-    const data = await res.json();
-    if (!data.Files || !data.Files[0]) {
-      statusBox.textContent = "❌ Error en la conversión.";
-      return;
+    // 2. Subir archivo
+    const uploadUrl = job.data.upload_url;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    await fetch(uploadUrl, { method: "POST", body: formData });
+
+    statusBox.textContent = "⏳ Convirtiendo archivo…";
+
+    // 3. Esperar conversión
+    let status = "";
+    while (status !== "finished") {
+      await new Promise(r => setTimeout(r, 2000));
+
+      const checkRes = await fetch(`https://api.convertio.co/convert/${jobId}/status`);
+      const check = await checkRes.json();
+
+      status = check.data.status;
     }
 
-    const fileUrl = data.Files[0].Url;
-    const fileName = data.Files[0].FileName || "archivo_convertido";
+    const downloadUrl = `https:${job.data.output.url}`;
 
-    // Descarga inmediata como blob (para evitar que el link caduque)
-    const resFile = await fetch(fileUrl);
-    const blob = await resFile.blob();
-    const urlBlob = URL.createObjectURL(blob);
-
+    // 4. Descargar archivo convertido
     const a = document.createElement("a");
-    a.href = urlBlob;
-    a.download = fileName;
+    a.href = downloadUrl;
+    a.download = `convertido.${type.output}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
 
-    statusBox.textContent = "✅ Conversión lista y descargada automáticamente.";
+    statusBox.textContent = "✅ Conversión completada.";
   } catch (err) {
     console.error(err);
-    statusBox.textContent = `❌ Ocurrió un error: ${err.message}`;
+    statusBox.textContent = `❌ Error: ${err.message}`;
   }
 }
 
