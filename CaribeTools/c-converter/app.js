@@ -3,17 +3,20 @@ const fileInput = document.getElementById("fileInput");
 const conversionType = document.getElementById("conversionType");
 const statusBox = document.getElementById("status");
 
+const API_KEY = "38f71645d94c716fc786671bef576457"; // TU API KEY REAL
+
+// Conversión de entrada-salida
 const conversions = {
-  "pdf-to-docx": { output: "docx" },
-  "docx-to-pdf": { output: "pdf" },
-  "pdf-to-png": { output: "png" },
-  "img-to-pdf": { output: "pdf" },
-  "pdf-to-xlsx": { output: "xlsx" },
-  "xlsx-to-pdf": { output: "pdf" },
-  "ppt-to-pdf": { output: "pdf" },
-  "pdf-to-ppt": { output: "pptx" },
-  "img-to-webp": { output: "webp" },
-  "txt-to-pdf": { output: "pdf" }
+  "pdf-to-docx": { input: "pdf", output: "docx" },
+  "docx-to-pdf": { input: "docx", output: "pdf" },
+  "pdf-to-png": { input: "pdf", output: "png" },
+  "img-to-pdf": { input: "jpg", output: "pdf" },
+  "pdf-to-xlsx": { input: "pdf", output: "xlsx" },
+  "xlsx-to-pdf": { input: "xlsx", output: "pdf" },
+  "ppt-to-pdf": { input: "pptx", output: "pdf" },
+  "pdf-to-ppt": { input: "pdf", output: "pptx" },
+  "img-to-webp": { input: "jpg", output: "webp" },
+  "txt-to-pdf": { input: "txt", output: "pdf" }
 };
 
 async function convertFile() {
@@ -30,25 +33,65 @@ async function convertFile() {
     return;
   }
 
-  statusBox.textContent = "⏳ Convirtiendo archivo…";
+  statusBox.textContent = "⏳ Creando conversión…";
 
   try {
+    // 1. Crear tarea
+    const createRes = await fetch("https://api.convertio.co/convert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        apikey: API_KEY,
+        input: "upload",
+        file: file.name,
+        outputformat: type.output
+      })
+    });
+
+    const createData = await createRes.json();
+
+    if (!createData || !createData.data || !createData.data.id) {
+      throw new Error("No se pudo crear la tarea.");
+    }
+
+    const jobId = createData.data.id;
+    const uploadUrl = createData.data.upload_url;
+
+    statusBox.textContent = "⏳ Subiendo archivo…";
+
+    // 2. Subir archivo
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("to", type.output);
 
-    const res = await fetch("https://converter-api.vercel.app/api/convert", {
+    await fetch(uploadUrl, {
       method: "POST",
       body: formData
     });
 
-    const data = await res.json();
+    statusBox.textContent = "⏳ Convirtiendo archivo…";
 
-    if (!data || !data.download) {
-      throw new Error("La API no devolvió un archivo válido");
+    // 3. Revisar estatus del proceso
+    let status = "";
+
+    while (status !== "finished") {
+      await new Promise(r => setTimeout(r, 2000));
+
+      const checkRes = await fetch(
+        `https://api.convertio.co/convert/${jobId}/status`
+      );
+
+      const checkData = await checkRes.json();
+      status = checkData.data.status;
+
+      if (status === "error") throw new Error("Falló la conversión.");
     }
 
-    const downloadUrl = data.download;
+    statusBox.textContent = "⏳ Preparando descarga…";
+
+    // 4. Descargar archivo final
+    const downloadUrl = createData.data.output.url;
 
     const a = document.createElement("a");
     a.href = downloadUrl;
