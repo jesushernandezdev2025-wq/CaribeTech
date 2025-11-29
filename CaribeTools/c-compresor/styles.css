@@ -22,13 +22,6 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-.header-top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
 .header h1 {
   font-size: 2.4rem;
   color: #70d6ff;
@@ -43,37 +36,16 @@ body {
   font-size: 1.1rem;
 }
 
-/* Banner de anuncio en header */
-.ad-banner {
-  width: 100%;
-  max-width: 728px;
-  height: 90px;
-  background: rgba(255,255,255,0.08);
-  border: 1px dashed rgba(255,255,255,0.25);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  opacity: 0.4;
-  user-select: none;
-  transition: opacity 0.3s ease;
-}
-.ad-banner:hover {
-  opacity: 0.6;
-  border-color: rgba(112,214,255,0.5);
-}
-
+/* Banner de anuncio en header (320x50) */
 .ad-header {
   width: 100%;
   max-width: 320px;
   height: 50px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 /* =========================
    CONTENEDOR PRINCIPAL
@@ -199,25 +171,33 @@ button:active {
 /* =========================
    ANUNCIOS INLINE & FOOTER
 ========================= */
-.ad-inline, .footer-ad {
+/* Inline ad (300x250) */
+.ad-inline {
+  width: 300px;
+  height: 250px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Footer ad (728x90) */
+.footer-ad {
   width: 100%;
   max-width: 728px;
   height: 90px;
-  background: rgba(255,255,255,0.08);
-  border: 1px dashed rgba(255,255,255,0.25);
-  border-radius: 12px;
   margin: 20px auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 14px;
-  opacity: 0.4;
-  user-select: none;
-  transition: opacity 0.3s ease;
+  align-items: center;
 }
-.ad-inline:hover, .footer-ad:hover {
-  opacity: 0.6;
-  border-color: rgba(112,214,255,0.5);
+
+/* Responsive: footer ad en móviles (320x50) */
+@media (max-width: 480px) {
+  .footer-ad {
+    max-width: 320px;
+    height: 50px;
+  }
 }
 
 /* =========================
