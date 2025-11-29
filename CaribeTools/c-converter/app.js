@@ -3,7 +3,7 @@ const fileInput = document.getElementById("fileInput");
 const conversionType = document.getElementById("conversionType");
 const statusBox = document.getElementById("status");
 
-const API_SECRET = "TU_SECRET_KEY"; // reemplaza con tu clave real
+const API_SECRET = "rKw9hUoGDXbHnGyYo7fdwyas577q4xwC"; // reemplaza con tu clave real
 const BASE_URL = "https://v2.convertapi.com/convert";
 
 async function convertFile() {
