@@ -1,0 +1,426 @@
+/* =========================
+   BASE
+========================= */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0b3043, #092734);
+    color: #e2f2ff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background: #0e3c52;
+    border-bottom: 2px solid #0a2633;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.header-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    color: #64CCC5;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(100,204,197,0.4);
+}
+
+.header p {
+    margin-top: 10px;
+    opacity: 0.85;
+    font-size: 1.1rem;
+}
+
+/* Banner de anuncio en header */
+.ad-banner {
+    width: 100%;
+    max-width: 728px;
+    height: 90px;
+    background: rgba(255,255,255,0.08);
+    border: 1px dashed rgba(255,255,255,0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    opacity: 0.4;
+    user-select: none;
+    transition: opacity 0.3s ease;
+}
+.ad-banner:hover {
+    opacity: 0.6;
+    border-color: rgba(100,204,197,0.5);
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    flex: 1;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+    background: rgba(14,60,82,0.9);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+/* =========================
+   INPUTS
+========================= */
+.input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.9);
+    color: #0b3043;
+    transition: all 0.3s ease;
+}
+.input-box input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(100,204,197,0.4);
+    background: rgba(255,255,255,0.95);
+}
+
+/* =========================
+   BOTONES
+========================= */
+button {
+    padding: 14px 20px;
+    border: none;
+    background: linear-gradient(135deg, #1a8cff, #47a6ff);
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(26,140,255,0.3);
+}
+button:hover {
+    background: linear-gradient(135deg, #47a6ff, #70d6ff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26,140,255,0.4);
+}
+button:active {
+    transform: scale(0.97);
+}
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(100,204,197,0.5);
+}
+
+/* =========================
+   LOADING & RESULT
+========================= */
+.loading {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #64CCC5;
+}
+
+.hidden {
+    display: none;
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(14,60,82,0.9);
+    border-radius: 16px;
+    border: 1px solid #092734;
+    box-shadow: inset 0 0 12px rgba(100,204,197,0.2);
+    animation: fadeIn 0.6s ease-out;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* =========================
+   VIDEO THUMB & DOWNLOAD
+========================= */
+.video-thumb {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.download-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 14px;
+    background: #1a8cff;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.download-btn:hover {
+    background: #47a6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26,140,255,0.4);
+}
+
+/* =========================
+   ANUNCIOS INLINE & BOX
+========================= */
+.ad-inline, .ads-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(8,32,44,0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.ads-title {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    color: #64CCC5;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.ad-space {
+    width: 100%;
+    height: 120px;
+    background: #123547;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.ad-space:hover {
+    opacity: 0.7;
+}
+
+/* =========================
+   INFO SECTION
+========================= */
+.info-section {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 14px;
+    margin-top: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.info-section h3 {
+    color: #64CCC5;
+    margin-bottom: 10px;
+}
+.info-section p {
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: auto;
+    background: #0e3c52;
+    border-top: 2px solid #0a2633;
+    opacity: 0.85;
+}
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.footer-ad {
+    width: 100%;
+    max-width: 728px;
+    height: 90px;
+    background: rgba(255,255,255,0.08);
+    border: 1px dashed rgba(255,255,255,0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    opacity: 0.4;
+    user-select: none;
+    transition: opacity 0.3s ease;
+}
+.footer-ad:hover {
+    opacity: 0.6;
+    border-color: rgba(100, 204, 197, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (min-width: 768px) {
+    .header-top {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-content {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .header h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .result {
+        font-size: 1rem;
+    }
+    
+    button {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    input {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .info-section {
+        padding: 15px;
+    }
+    
+    .info-section h3 {
+        font-size: 18px;
+    }
+    
+    .info-section p {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.info-section,
+.result {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* =========================
+   SCROLLBAR PERSONALIZADA
+========================= */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(100, 204, 197, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 204, 197, 0.7);
+}
+
+/* Back button */
+.back-btn {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #64CCC5; /* o #70d6ff según tu paleta */
+}
+
+.back-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(100, 204, 197, 0.4);
+}
+
+.back-btn:active {
+    transform: translateY(1px);
+    opacity: 0.9;
+}
