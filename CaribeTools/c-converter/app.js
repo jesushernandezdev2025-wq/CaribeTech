@@ -3,14 +3,14 @@ const fileInput = document.getElementById("fileInput");
 const conversionType = document.getElementById("conversionType");
 const statusBox = document.getElementById("status");
 
-const API_KEY = "38f71645d94c716fc786671bef576457"; // TU API KEY REAL
+// Tu API Key Convertio
+const API_KEY = "38f71645d94c716fc786671bef576457";
 
-// Conversión de entrada-salida
 const conversions = {
   "pdf-to-docx": { input: "pdf", output: "docx" },
   "docx-to-pdf": { input: "docx", output: "pdf" },
   "pdf-to-png": { input: "pdf", output: "png" },
-  "img-to-pdf": { input: "jpg", output: "pdf" },
+  "img-to-pdf": { input: "jpg", output: "pdf" }, 
   "pdf-to-xlsx": { input: "pdf", output: "xlsx" },
   "xlsx-to-pdf": { input: "xlsx", output: "pdf" },
   "ppt-to-pdf": { input: "pptx", output: "pdf" },
@@ -21,7 +21,6 @@ const conversions = {
 
 async function convertFile() {
   const file = fileInput.files[0];
-
   if (!file) {
     statusBox.textContent = "⚠️ Selecciona un archivo primero.";
     return;
@@ -33,72 +32,63 @@ async function convertFile() {
     return;
   }
 
-  statusBox.textContent = "⏳ Creando conversión…";
+  statusBox.textContent = "⏳ Subiendo archivo...";
 
   try {
-    // 1. Crear tarea
+    // 1. Crear Job
     const createRes = await fetch("https://api.convertio.co/convert", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         apikey: API_KEY,
         input: "upload",
-        file: file.name,
+        inputformat: type.input,
         outputformat: type.output
       })
     });
 
     const createData = await createRes.json();
-
-    if (!createData || !createData.data || !createData.data.id) {
-      throw new Error("No se pudo crear la tarea.");
+    if (!createData.data || !createData.data.id) {
+      throw new Error("No se pudo crear la conversión.");
     }
 
     const jobId = createData.data.id;
-    const uploadUrl = createData.data.upload_url;
-
-    statusBox.textContent = "⏳ Subiendo archivo…";
 
     // 2. Subir archivo
+    statusBox.textContent = "⏳ Enviando archivo...";
+
     const formData = new FormData();
     formData.append("file", file);
 
-    await fetch(uploadUrl, {
+    await fetch(createData.data.upload_url, {
       method: "POST",
       body: formData
     });
 
-    statusBox.textContent = "⏳ Convirtiendo archivo…";
+    // 3. Revisar estado
+    statusBox.textContent = "⏳ Convirtiendo archivo...";
 
-    // 3. Revisar estatus del proceso
     let status = "";
-
     while (status !== "finished") {
       await new Promise(r => setTimeout(r, 2000));
 
-      const checkRes = await fetch(
-        `https://api.convertio.co/convert/${jobId}/status`
-      );
-
+      const checkRes = await fetch(`https://api.convertio.co/convert/${jobId}/status`);
       const checkData = await checkRes.json();
+
       status = checkData.data.status;
 
-      if (status === "error") throw new Error("Falló la conversión.");
+      if (status === "error") {
+        throw new Error("La conversión falló.");
+      }
     }
 
-    statusBox.textContent = "⏳ Preparando descarga…";
-
-    // 4. Descargar archivo final
-    const downloadUrl = createData.data.output.url;
+    // 4. Descargar archivo
+    const downloadUrl = "https:" + createData.data.output.url;
 
     const a = document.createElement("a");
     a.href = downloadUrl;
     a.download = `convertido.${type.output}`;
-    document.body.appendChild(a);
     a.click();
-    a.remove();
 
     statusBox.textContent = "✅ Conversión completada.";
   } catch (err) {

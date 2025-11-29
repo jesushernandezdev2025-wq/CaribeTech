@@ -44,7 +44,7 @@ body {
 }
 
 /* Banner de anuncio en header */
-.ad-banner {
+.ad-header {
     width: 100%;
     max-width: 728px;
     height: 90px;
@@ -122,7 +122,7 @@ input:focus, select:focus {
 /* =========================
    BOTONES
 ========================= */
-button {
+#convertBtn {
     width: 100%;
     padding: 14px;
     background: linear-gradient(135deg, #70d6ff, #47a6ff);
@@ -134,13 +134,14 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(71,166,255,0.3);
+    margin-top: 10px;
 }
-button:hover {
+#convertBtn:hover {
     background: linear-gradient(135deg, #98e0ff, #70d6ff);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(71,166,255,0.4);
 }
-button:active {
+#convertBtn:active {
     transform: scale(0.97);
 }
 
@@ -196,7 +197,7 @@ button:active {
     user-select: none;
     transition: opacity 0.3s ease;
 }
-.ad-inline:hover, .footer-ad:hover, .ad-banner:hover {
+.ad-inline:hover, .footer-ad:hover, .ad-header:hover {
     opacity: 0.6;
     border-color: rgba(112,214,255,0.5);
 }
