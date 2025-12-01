@@ -1,6 +1,4 @@
-/* ================================
-   ESTILOS GENERALES
-================================ */
+/* ================================ ESTILOS GENERALES ================================ */
 * {
     margin: 0;
     padding: 0;
@@ -9,34 +7,36 @@
 }
 
 body {
-    background: #f3f6fa;
-    color: #1c2a3a;
+    background: linear-gradient(135deg, #0a2540 0%, #1e3a5f 100%);
+    color: #e0f2fe;
     padding: 15px;
+    min-height: 100vh;
 }
 
-/* ================================
-   HEADER
-================================ */
+/* ================================ HEADER ================================ */
 header {
     text-align: center;
-    padding: 20px 10px;
+    padding: 30px 10px;
+    background: rgba(10, 37, 64, 0.7);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
 }
 
 header h1 {
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    color: #0b4da2;
+    color: #22d3ee;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 header p {
-    margin-top: 5px;
-    color: #4a5b70;
-    font-size: 1rem;
+    margin-top: 8px;
+    color: #7dd3fc;
+    font-size: 1.1rem;
 }
 
-/* ================================
-   ANUNCIOS
-================================ */
+/* ================================ ANUNCIOS ================================ */
 .ads {
     display: flex;
     justify-content: center;
@@ -47,121 +47,149 @@ header p {
     margin: 30px 0;
 }
 
-/* ================================
-   CAJA DE HERRAMIENTA
-================================ */
+/* ================================ CAJA DE HERRAMIENTA ================================ */
 .tool-box {
-    background: #ffffff;
+    background: linear-gradient(145deg, #0f4c75 0%, #1e3a5f 100%);
     max-width: 550px;
     margin: 20px auto;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.2);
 }
 
 .tool-box h2 {
-    font-size: 1.4rem;
-    margin-bottom: 18px;
-    color: #0e2342;
+    font-size: 1.6rem;
+    margin-bottom: 22px;
+    color: #22d3ee;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ================================
-   INPUTS Y SELECT
-================================ */
+/* ================================ INPUTS Y SELECT ================================ */
 label {
     display: block;
     font-weight: 600;
-    margin: 10px 0 5px;
-    color: #334155;
+    margin: 12px 0 6px;
+    color: #7dd3fc;
 }
 
 input, select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    background: #f8fafc;
+    padding: 14px;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    border-radius: 12px;
+    background: rgba(30, 58, 95, 0.6);
+    color: #e0f2fe;
     font-size: 1rem;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     outline: none;
+    backdrop-filter: blur(5px);
 }
 
-input:focus,
-select:focus {
-    border-color: #0b4da2;
-    box-shadow: 0 0 5px rgba(11, 77, 162, 0.3);
+input:focus, select:focus {
+    border-color: #22d3ee;
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+    background: rgba(30, 58, 95, 0.8);
 }
 
-/* ================================
-   BOTÓN
-================================ */
+input::placeholder, select::placeholder {
+    color: #7dd3fc;
+    opacity: 0.7;
+}
+
+/* ================================ BOTÓN ================================ */
 button {
     width: 100%;
-    padding: 14px;
-    margin-top: 20px;
-    background: #0b4da2;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 16px;
+    margin-top: 24px;
+    background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+    color: #0a2540;
+    font-size: 1.2rem;
+    font-weight: 700;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
-    transition: 0.25s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
 }
 
 button:hover {
-    background: #0d5fcb;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #22d3ee 0%, #67e8f9 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
 }
 
-/* ================================
-   RESULTADO
-================================ */
+button:active {
+    transform: translateY(-1px);
+}
+
+/* ================================ RESULTADO ================================ */
 #resultado {
-    margin-top: 25px;
-    padding: 20px;
-    background: #e8f0fc;
-    border-left: 4px solid #0b4da2;
-    border-radius: 10px;
+    margin-top: 30px;
+    padding: 24px;
+    background: linear-gradient(145deg, rgba(34, 211, 238, 0.1) 0%, rgba(15, 76, 117, 0.2) 100%);
+    border-left: 4px solid #22d3ee;
+    border-radius: 12px;
     display: none;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.4s ease-in-out;
+    color: #e0f2fe;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(34, 211, 238, 0.2);
 }
 
-/* Animación */
+/* Animación mejorada */
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(5px);}
-    to   {opacity: 1; transform: translateY(0);}
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* ================================
-   FOOTER
-================================ */
+/* ================================ FOOTER ================================ */
 footer {
     text-align: center;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: #4b5563;
+    margin-top: 50px;
+    font-size: 0.95rem;
+    color: #7dd3fc;
+    padding: 20px;
+    background: rgba(10, 37, 64, 0.5);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* ================================ RESPONSIVE ================================ */
 @media (max-width: 600px) {
     header h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
-
+    
     .tool-box {
         padding: 20px;
+        margin: 15px;
     }
-
+    
     button {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        padding: 14px;
     }
-
+    
     .ads-middle {
         transform: scale(0.9);
+    }
+    
+    body {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 20px 8px;
     }
 }
