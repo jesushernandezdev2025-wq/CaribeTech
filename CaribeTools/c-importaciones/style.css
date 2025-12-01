@@ -1,4 +1,6 @@
-/* ================================ ESTILOS GENERALES ================================ */
+/* ===============================
+   RESET
+================================== */
 * {
     margin: 0;
     padding: 0;
@@ -7,189 +9,154 @@
 }
 
 body {
-    background: linear-gradient(135deg, #0a2540 0%, #1e3a5f 100%);
-    color: #e0f2fe;
-    padding: 15px;
-    min-height: 100vh;
+    background: #f5f7fa;
+    color: #1a1a1a;
+    line-height: 1.6;
 }
 
-/* ================================ HEADER ================================ */
-header {
+/* ===============================
+   HEADER
+================================== */
+.top-header {
+    background: #0077b6;
+    padding: 25px 0;
+    color: white;
     text-align: center;
-    padding: 30px 10px;
-    background: rgba(10, 37, 64, 0.7);
-    border-radius: 16px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 
-header h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #22d3ee;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+.top-header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
 }
 
-header p {
-    margin-top: 8px;
-    color: #7dd3fc;
-    font-size: 1.1rem;
+/* ===============================
+   CONTAINER
+================================== */
+.container {
+    width: 92%;
+    max-width: 900px;
+    margin: 20px auto;
 }
 
-/* ================================ ANUNCIOS ================================ */
+/* ===============================
+   ADS
+================================== */
 .ads {
     display: flex;
     justify-content: center;
-    margin: 20px auto;
+    margin: 20px 0;
+}
+
+.ads-top {
+    margin-top: 25px;
 }
 
 .ads-middle {
-    margin: 30px 0;
+    margin: 25px 0;
 }
 
-/* ================================ CAJA DE HERRAMIENTA ================================ */
-.tool-box {
-    background: linear-gradient(145deg, #0f4c75 0%, #1e3a5f 100%);
-    max-width: 550px;
-    margin: 20px auto;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(34, 211, 238, 0.2);
+/* ===============================
+   MAIN TOOL CARD
+================================== */
+.tool-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 22px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
 }
 
-.tool-box h2 {
+.tool-card h2 {
     font-size: 1.6rem;
-    margin-bottom: 22px;
-    color: #22d3ee;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 5px;
 }
 
-/* ================================ INPUTS Y SELECT ================================ */
-label {
+.subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* ===============================
+   INPUTS
+================================== */
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
     display: block;
+    margin-bottom: 6px;
     font-weight: 600;
-    margin: 12px 0 6px;
-    color: #7dd3fc;
 }
 
-input, select {
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c7c7c7;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #0077b6;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0,119,182,0.3);
+}
+
+/* ===============================
+   BUTTON
+================================== */
+.btn-calc {
     width: 100%;
     padding: 14px;
-    border: 1px solid rgba(34, 211, 238, 0.3);
-    border-radius: 12px;
-    background: rgba(30, 58, 95, 0.6);
-    color: #e0f2fe;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-    backdrop-filter: blur(5px);
-}
-
-input:focus, select:focus {
-    border-color: #22d3ee;
-    box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
-    background: rgba(30, 58, 95, 0.8);
-}
-
-input::placeholder, select::placeholder {
-    color: #7dd3fc;
-    opacity: 0.7;
-}
-
-/* ================================ BOTÓN ================================ */
-button {
-    width: 100%;
-    padding: 16px;
-    margin-top: 24px;
-    background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
-    color: #0a2540;
-    font-size: 1.2rem;
-    font-weight: 700;
+    background: #0077b6;
+    color: white;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 14px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    margin-top: 10px;
+    transition: 0.25s ease;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #22d3ee 0%, #67e8f9 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
+.btn-calc:hover {
+    background: #005f8a;
 }
 
-button:active {
-    transform: translateY(-1px);
-}
-
-/* ================================ RESULTADO ================================ */
-#resultado {
-    margin-top: 30px;
-    padding: 24px;
-    background: linear-gradient(145deg, rgba(34, 211, 238, 0.1) 0%, rgba(15, 76, 117, 0.2) 100%);
-    border-left: 4px solid #22d3ee;
-    border-radius: 12px;
+/* ===============================
+   RESULTADO
+================================== */
+.resultado {
+    margin-top: 25px;
+    padding: 18px;
+    background: #eef8ff;
+    border-left: 4px solid #0077b6;
+    border-radius: 6px;
     display: none;
-    animation: fadeIn 0.4s ease-in-out;
-    color: #e0f2fe;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(34, 211, 238, 0.2);
 }
 
-/* Animación mejorada */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ================================ FOOTER ================================ */
+/* ===============================
+   FOOTER
+================================== */
 footer {
     text-align: center;
-    margin-top: 50px;
-    font-size: 0.95rem;
-    color: #7dd3fc;
     padding: 20px;
-    background: rgba(10, 37, 64, 0.5);
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
+    margin-top: 40px;
+    color: #444;
+    font-size: 0.9rem;
 }
 
-/* ================================ RESPONSIVE ================================ */
+/* RESPONSIVE */
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 1.8rem;
+    .tool-card {
+        padding: 18px;
     }
-    
-    .tool-box {
-        padding: 20px;
-        margin: 15px;
-    }
-    
-    button {
-        font-size: 1.1rem;
-        padding: 14px;
-    }
-    
-    .ads-middle {
-        transform: scale(0.9);
-    }
-    
-    body {
-        padding: 10px;
-    }
-    
-    header {
-        padding: 20px 8px;
+
+    .btn-calc {
+        font-size: 1rem;
     }
 }

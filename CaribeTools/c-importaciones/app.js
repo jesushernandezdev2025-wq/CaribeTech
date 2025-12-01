@@ -15,7 +15,8 @@ const costoManejo = 5.00; // USD
 
 document.getElementById("calcular").addEventListener("click", () => {
     const precio = parseFloat(document.getElementById("precio").value);
-    const libras = parseFloat(document.getElementById("libras").value);
+    const envio = parseFloat(document.getElementById("envio").value) || 0;
+    const libras = parseFloat(document.getElementById("peso").value); // ← CORREGIDO
     const tienda = document.getElementById("tienda").value;
 
     const resultadoDiv = document.getElementById("resultado");
@@ -41,20 +42,15 @@ document.getElementById("calcular").addEventListener("click", () => {
     let impuestoTotal = 0;
 
     if (precio > 200) {
-        // ITBIS 18%
-        itbis = precio * 0.18;
-
-        // Gravamen aproximado 20%
-        gravamen = precio * 0.20;
-
-        // Total de impuestos
+        itbis = precio * 0.18;       // ITBIS 18%
+        gravamen = precio * 0.20;    // Gravamen aprox.
         impuestoTotal = itbis + gravamen;
     }
 
     // ================================
     //  3. TOTAL FINAL
     // ================================
-    const totalFinal = precio + impuestoTotal + costoCourier + costoManejo;
+    const totalFinal = precio + envio + impuestoTotal + costoCourier + costoManejo;
 
     // ================================
     //  4. MOSTRAR RESULTADO
@@ -64,20 +60,21 @@ document.getElementById("calcular").addEventListener("click", () => {
         <h3>📦 Resultado del Cálculo</h3>
 
         <p><strong>Precio del artículo:</strong> US$ ${precio.toFixed(2)}</p>
-        <p><strong>Costo de Courier (${libras} lb a US$ ${tarifaPorLb}/lb):</strong> US$ ${costoCourier.toFixed(2)}</p>
+        <p><strong>Envío internacional:</strong> US$ ${envio.toFixed(2)}</p>
+        <p><strong>Costo de Courier (${libras} lb × US$ ${tarifaPorLb}/lb):</strong> US$ ${costoCourier.toFixed(2)}</p>
         <p><strong>Costo de Manejo:</strong> US$ ${costoManejo.toFixed(2)}</p>
 
         ${
             precio < 200
                 ? `<p style="color:green;"><strong>Exento de impuestos (menor a US$200)</strong></p>`
                 : `
-            <p><strong>ITBIS (18%):</strong> US$ ${itbis.toFixed(2)}</p>
-            <p><strong>Gravamen (20%):</strong> US$ ${gravamen.toFixed(2)}</p>
-            <p><strong>Total de Impuestos:</strong> US$ ${impuestoTotal.toFixed(2)}</p>
-        `
+                    <p><strong>ITBIS (18%):</strong> US$ ${itbis.toFixed(2)}</p>
+                    <p><strong>Gravamen (20%):</strong> US$ ${gravamen.toFixed(2)}</p>
+                    <p><strong>Total de Impuestos:</strong> US$ ${impuestoTotal.toFixed(2)}</p>
+                `
         }
 
-        <hr style="margin: 15px 0;">
+        <hr>
 
         <p style="font-size: 1.2rem;"><strong>Total a pagar:</strong> US$ ${totalFinal.toFixed(2)}</p>
     `;
