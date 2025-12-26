@@ -212,6 +212,43 @@
       </div>
     </div>
 
+    <!-- WIDGET DE SOPORTE -->
+<div id="support-widget">
+  <div id="support-button">
+    <img src="../img/Widget/soporte.png" alt="Soporte" />
+  </div>
+
+  <div id="support-window">
+    <div id="support-header">
+      <h3>Soporte en Vivo</h3>
+    </div>
+
+    <div id="support-content">
+      
+      <!-- Paso 1: ingresar nombre -->
+      <div id="name-step">
+        <p>Por favor, ingresa tu nombre para comenzar:</p>
+        <input type="text" id="client-name" placeholder="Tu nombre…">
+        <button id="start-chat">Comenzar</button>
+      </div>
+
+      <!-- Paso 2: chat activo -->
+      <div id="chat-step" style="display:none;">
+        <div id="chat-messages"></div>
+
+        <div id="chat-input">
+          <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+          <button id="send-message">Enviar</button>
+        </div>
+      </div>
+
+      <!-- Horario cerrado -->
+      <p id="closed-message" style="display:none; color:#e74c3c; font-weight:bold;"></p>
+
+    </div>
+  </div>
+</div>
+
     <div class="footer-bottom">
       <p><a href="contacto.html">Contáctanos</a></p>
       <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
@@ -367,5 +404,119 @@ climaMenu.querySelectorAll("button").forEach(btn => {
     climaMenu.style.display = "none";
   });
 });
+
+</script>
+
+<script>
+// =========================
+// CONFIGURACIÓN DE HORARIO
+// =========================
+const horario = {
+    apertura: 0,   // 8 AM
+    cierre: 24    // 12 AM
+};
+
+const SUPPORT_CHANNEL = "caribetech-support";
+
+// =========================
+// ELEMENTOS
+// =========================
+const supportBtn = document.getElementById("support-button");
+const supportWindow = document.getElementById("support-window");
+const nameStep = document.getElementById("name-step");
+const chatStep = document.getElementById("chat-step");
+const closedMessage = document.getElementById("closed-message");
+const startChatBtn = document.getElementById("start-chat");
+const sendMessageBtn = document.getElementById("send-message");
+const messagesDiv = document.getElementById("chat-messages");
+
+// =========================
+// MOSTRAR/OCULTAR WIDGET
+// =========================
+supportBtn.addEventListener("click", () => {
+    supportWindow.style.display =
+      supportWindow.style.display === "block" ? "none" : "block";
+});
+
+// =========================
+// VERIFICAR HORARIO
+// =========================
+function soporteAbierto() {
+    const ahora = new Date();
+    const hora = ahora.getHours();
+    return hora >= horario.apertura && hora < horario.cierre;
+}
+
+// =========================
+// INICIO DEL CHAT
+// =========================
+startChatBtn.addEventListener("click", () => {
+    const nombre = document.getElementById("client-name").value.trim();
+
+    if (nombre === "") return alert("Por favor escribe tu nombre.");
+
+    localStorage.setItem("support_client_name", nombre);
+
+    if (!soporteAbierto()) {
+        closedMessage.style.display = "block";
+        closedMessage.innerText =
+          `Soporte cerrado. Horario: ${horario.apertura}:00 a ${horario.cierre}:00`;
+        return;
+    }
+
+    nameStep.style.display = "none";
+    chatStep.style.display = "block";
+
+    addMessage(`Hola ${nombre}, ¿en qué podemos ayudarte hoy?`, "support");
+});
+
+
+// =========================
+// FUNCIÓN PARA AGREGAR MENSAJES
+// =========================
+function addMessage(text, sender) {
+    const msg = document.createElement("div");
+    msg.classList.add("message", sender); // <-- user / support
+    msg.textContent = text;
+
+    messagesDiv.appendChild(msg);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// =========================
+// ENVÍO DE MENSAJE
+// =========================
+sendMessageBtn.addEventListener("click", () => {
+    const input = document.getElementById("message-input");
+    const texto = input.value.trim();
+    const nombre = localStorage.getItem("support_client_name");
+
+    if (!texto || !nombre) return;
+
+    addMessage(texto, "user");
+    input.value = "";
+
+    // 🔥 ENVIAR AL DASHBOARD
+    window.postMessage({
+        channel: "caribetech-support",
+        nombre,
+        texto
+    }, "*");
+});
+
+// =========================
+// RECIBIR MENSAJES DEL SOPORTE
+// =========================
+window.addEventListener("message", (e) => {
+  const data = e.data;
+
+  if (!data || data.channel !== "caribetech-support-reply") return;
+
+  const { texto } = data;
+  if (!texto) return;
+
+  addMessage(texto, "support");
+});
+
 
 </script>
