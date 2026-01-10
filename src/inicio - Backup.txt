@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CaribeTech - Innovación digital en Latinoamérica. Soluciones tecnológicas modernas y escalables.">
+  <meta name="keywords" content="tecnología, innovación, Latinoamérica, soluciones digitales">
+  <meta name="author" content="CaribeTech">
+  <title>CaribeTech - Innovación Digital en Latinoamérica</title>
+
+  <!-- Preconexión para mejorar rendimiento -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../css/style-index.css">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caribetech.com/">
+  <meta property="og:title" content="CaribeTech - Innovación Digital">
+  <meta property="og:description" content="Impulsando la tecnología en Latinoamérica con soluciones innovadoras">
+  <meta property="og:image" content="../img/CaribeTech - Logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://caribetech.com/">
+  <meta property="twitter:title" content="CaribeTech - Innovación Digital">
+  <meta property="twitter:description" content="Impulsando la tecnología en Latinoamérica con soluciones innovadoras">
+  <meta property="twitter:image" content="../img/CaribeTech - Logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../img/Navidad/Favicon Web Navideño.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="logo">
+      <a href="inicio.html" aria-label="CaribeTech Inicio">
+        <img src="../img/Navidad/CaribeTech - Navideño png.png" alt="Logo CaribeTech" width="180" height="50" loading="lazy">
+      </a>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Navegación principal">
+      <ul>
+        <li><a href="inicio.html" class="active" aria-current="page">Inicio</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="app.html">Aplicaciones</a></li>
+        <li><a href="tiktok.html">TikTok</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="pronto.html">Tools</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón menú móvil (mejora accesibilidad) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" role="banner">
+      <div class="hero-content">
+        <h1>Impulsando la tecnología en Latinoamérica</h1>
+        <p>CaribeTech es la marca matriz que conecta innovación, confianza y crecimiento digital en la región.</p>
+        <a href="app.html" class="btn btn-primary" role="button">Explora nuestras aplicaciones</a>
+      </div>
+ <!-- Capas de efectos -->
+  <div class="snow"></div>
+  <div class="trees-falling"></div>
+  <div class="fireworks">
+  <div class="firework"></div>
+  <div class="firework delay1"></div>
+  <div class="firework delay2"></div>
+</div>
+
+
+      <!-- Elemento decorativo adicional -->
+      <div class="hero-decoration" aria-hidden="true"></div>
+
+      <!-- CONTENEDOR DE WIDGETS FIJOS EN EL HERO -->
+<div class="hero-widgets">
+
+  <!-- WIDGET DE CLIMA -->
+  <div class="clima-toggle">
+    <button id="climaBtn" aria-haspopup="true" aria-expanded="false">
+      ⛅ RD: <span id="tempPrincipal">--°C</span>
+    </button>
+
+    <div class="clima-menu" id="climaMenu" role="menu" aria-hidden="true">
+      <button data-lat="18.4861" data-lon="-69.9312" data-code="RD" data-flag="🇩🇴">🇩🇴 República Dominicana</button>
+      <button data-lat="18.2208" data-lon="-66.5901" data-code="PR" data-flag="🇵🇷">🇵🇷 Puerto Rico</button>
+      <button data-lat="23.1136" data-lon="-82.3666" data-code="CU" data-flag="🇨🇺">🇨🇺 Cuba</button>
+      <button data-lat="10.6667" data-lon="-61.5167" data-code="TT" data-flag="🇹🇹">🇹🇹 Trinidad y Tobago</button>
+      <button data-lat="9.0000" data-lon="-79.5000" data-code="PA" data-flag="🇵🇦">🇵🇦 Panamá</button>
+      <button data-lat="4.7110" data-lon="-74.0721" data-code="CO" data-flag="🇨🇴">🇨🇴 Colombia</button>
+      <button data-lat="12.0464" data-lon="-77.0428" data-code="PE" data-flag="🇵🇪">🇵🇪 Perú</button>
+      <button data-lat="19.4326" data-lon="-99.1332" data-code="MX" data-flag="🇲🇽">🇲🇽 México</button>
+    </div>
+  </div>
+
+  <!-- WIDGET DE HORA -->
+  <div class="timezone-toggle" id="timezoneWidget" aria-live="polite">
+    <button id="timezoneBtn" aria-haspopup="true" aria-expanded="false">
+      🕒 <span id="tzAbbr">RD</span>: <span id="currentTime">--:--:--</span>
+    </button>
+
+    <div class="timezone-menu" id="timezoneMenu" role="menu" aria-hidden="true">
+      <button data-tz="America/Santo_Domingo" data-abbr="RD">🇩🇴 República Dominicana</button>
+      <button data-tz="America/Puerto_Rico" data-abbr="PR">🇵🇷 Puerto Rico</button>
+      <button data-tz="America/Havana" data-abbr="CU">🇨🇺 Cuba</button>
+      <button data-tz="America/Port_of_Spain" data-abbr="TT">🇹🇹 Trinidad y Tobago</button>
+      <button data-tz="America/Panama" data-abbr="PA">🇵🇦 Panamá</button>
+      <button data-tz="America/Bogota" data-abbr="CO">🇨🇴 Colombia</button>
+      <button data-tz="America/Lima" data-abbr="PE">🇵🇪 Perú</button>
+      <button data-tz="America/Mexico_City" data-abbr="MX">🇲🇽 México</button>
+    </div>
+  </div>
+
+  <!-- BOTÓN DE MÚSICA -->
+  <button id="music-btn" class="music-toggle" aria-label="Activar música navideña">
+    🎄 Música
+  </button>
+
+</div>
+
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading">Nuestros pilares</h2>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-lightbulb fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Innovación</h3>
+            <p>Soluciones modernas y escalables para técnicos y usuarios.</p>
+            <a href="innovación.html" class="feature-link" aria-label="Más sobre Innovación">Saber más →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Confianza</h3>
+            <p>Construimos reputación y seguridad en cada interacción.</p>
+            <a href="confianza.html" class="feature-link" aria-label="Más sobre Confianza">Saber más →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line fa-2x" aria-hidden="true"></i>
+            </div>
+            <h3>Crecimiento</h3>
+            <p>Impulsamos el desarrollo profesional en toda Latinoamérica.</p>
+            <a href="crecimiento.html" class="feature-link" aria-label="Más sobre Crecimiento">Saber más →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+<section class="testimonials">
+  <div class="testimonials-container">
+    <h2 class="section-title">Lo que opinan nuestros clientes</h2>
+
+    <div class="testimonials-grid">
+      <blockquote class="testimonial-card">
+        <p class="testimonial-text">
+          “”
+        </p>
+        <cite class="testimonial-author">— Nuevos comentarios, pronto.</cite>
+      </blockquote>
+
+      <blockquote class="testimonial-card">
+        <p class="testimonial-text">
+          “”
+        </p>
+        <cite class="testimonial-author">— Nuevos comentarios, pronto.</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links" role="list" aria-label="Redes sociales">
+          <a href="https://www.instagram.com/caribetech_do/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de CaribeTech">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.tiktok.com/@repara_rd" target="_blank" rel="noopener noreferrer" aria-label="TikTok de CaribeTech">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Enlaces rápidos</h3>
+        <nav aria-label="Enlaces del pie de página">
+          <ul>
+            <p><a href="privacidad.html">Política de privacidad</a></p>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- WIDGET DE SOPORTE 
+<div id="support-widget">
+  <div id="support-button">
+    <img src="../img/Widget/soporte.png" alt="Soporte" />
+  </div>
+
+  <div id="support-window">
+    <div id="support-header">
+      <h3>Soporte en Vivo</h3>
+    </div>
+
+    <div id="support-content">
+      
+      <!-- Paso 1: ingresar nombre 
+      <div id="name-step">
+        <p>Por favor, ingresa tu nombre para comenzar:</p>
+        <input type="text" id="client-name" placeholder="Tu nombre…">
+        <button id="start-chat">Comenzar</button>
+      </div>
+
+      <!-- Paso 2: chat activo 
+      <div id="chat-step" style="display:none;">
+        <div id="chat-messages"></div>
+
+        <div id="chat-input">
+          <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+          <button id="send-message">Enviar</button>
+        </div>
+      </div>
+
+      <!-- Horario cerrado -
+      <p id="closed-message" style="display:none; color:#e74c3c; font-weight:bold;"></p>
+
+    </div>
+  </div>
+</div>
+-->
+
+    <div class="footer-bottom">
+      <p><a href="contacto.html">Contáctanos</a></p>
+      <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+<!-- AUDIO -->
+<audio id="navidad-audio" src="/audio/navidad.mp3" preload="auto" loop></audio>
+
+<!-- Tu script general (solo UNA VEZ) -->
+<script src="../js/script.js" defer></script>
+
+<!-- Script: widget hora y botón de música -->
+<script>
+  // --- Widget de hora ---
+  (function () {
+  const tzBtn = document.getElementById('timezoneBtn');
+  const tzMenu = document.getElementById('timezoneMenu');
+  const tzTime = document.getElementById('currentTime');
+  const tzAbbr = document.getElementById('tzAbbr');
+
+  let currentTZ = 'America/Santo_Domingo';
+  let currentAbbr = 'RD';
+  let intervalId = null;
+
+  function formatTime(tz) {
+    return new Intl.DateTimeFormat('es-DO', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: tz
+    }).format(new Date());
+  }
+
+  function startClock(tz) {
+    if (intervalId) clearInterval(intervalId);
+
+    tzTime.textContent = formatTime(tz);
+
+    intervalId = setInterval(() => {
+      tzTime.textContent = formatTime(tz);
+    }, 1000);
+  }
+
+  // Inicializar
+  startClock(currentTZ);
+
+  // Abrir/cerrar menú
+  tzBtn.addEventListener('click', (e) => {
+    const open = tzMenu.style.display === 'block';
+    tzMenu.style.display = open ? 'none' : 'block';
+    tzBtn.setAttribute('aria-expanded', !open);
+    e.stopPropagation();
+  });
+
+  // Selección de país
+  tzMenu.querySelectorAll('button[data-tz]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tz = btn.dataset.tz;
+      const abbr = btn.dataset.abbr;
+
+      currentTZ = tz;
+      currentAbbr = abbr;
+
+      tzAbbr.textContent = abbr;
+
+      startClock(tz);
+
+      tzMenu.style.display = 'none';
+      tzBtn.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Cerrar si se hace clic fuera
+  document.addEventListener('click', (e) => {
+    if (!tzMenu.contains(e.target) && e.target !== tzBtn) {
+      tzMenu.style.display = 'none';
+      tzBtn.setAttribute('aria-expanded', false);
+    }
+  });
+})();
+
+// <!-- ======== BOTON DE MUSICA NAVIDEÑA ======== -->
+// (function () {
+//   const audio = document.getElementById('navidad-audio');
+//   const btn = document.getElementById('music-btn');
+//   let playing = false;
+//
+//   // Desactivar autoplay real
+//   audio.autoplay = false;
+//
+//   audio.volume = 0.7;
+//
+//   btn.addEventListener('click', () => {
+//     if (!playing) {
+//       audio.play().catch(() => {});
+//       btn.textContent = '⏸️ Pausar música';
+//       playing = true;
+//     } else {
+//       audio.pause();
+//       btn.textContent = '🎄 Música';
+//       playing = false;
+//     }
+//   });
+// })();
+
+  async function obtenerClima(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.current_weather.temperature;
+}
+
+const climaBtn = document.getElementById("climaBtn");
+const climaMenu = document.getElementById("climaMenu");
+const tempPrincipal = document.getElementById("tempPrincipal");
+
+// Abrir menú
+climaBtn.addEventListener("click", () => {
+  const open = climaMenu.style.display === "block";
+  climaMenu.style.display = open ? "none" : "block";
+});
+
+// Cerrar si clic fuera
+document.addEventListener("click", (e) => {
+  if (!climaBtn.contains(e.target) && !climaMenu.contains(e.target)) {
+    climaMenu.style.display = "none";
+  }
+});
+
+// Al iniciar: poner clima de RD automáticamente
+(async () => {
+  const rdTemp = await obtenerClima(18.4861, -69.9312);
+  tempPrincipal.textContent = `${rdTemp}°C`;
+})();
+
+// Cuando selecciones un país
+climaMenu.querySelectorAll("button").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const lat = btn.dataset.lat;
+    const lon = btn.dataset.lon;
+    const code = btn.dataset.code;
+    const flag = btn.dataset.flag;
+
+    const temp = await obtenerClima(lat, lon);
+
+    // Cambiar el botón principal
+    climaBtn.innerHTML = `${flag} ${code}: <span>${temp}°C</span>`;
+
+    // Cerrar menú
+    climaMenu.style.display = "none";
+  });
+});
+
+</script>
+
+<script>
+// =========================
+// CONFIGURACIÓN DE HORARIO
+// =========================
+const horario = {
+    apertura: 0,   // 8 AM
+    cierre: 24    // 12 AM
+};
+
+const SUPPORT_CHANNEL = "caribetech-support";
+
+// =========================
+// ELEMENTOS
+// =========================
+const supportBtn = document.getElementById("support-button");
+const supportWindow = document.getElementById("support-window");
+const nameStep = document.getElementById("name-step");
+const chatStep = document.getElementById("chat-step");
+const closedMessage = document.getElementById("closed-message");
+const startChatBtn = document.getElementById("start-chat");
+const sendMessageBtn = document.getElementById("send-message");
+const messagesDiv = document.getElementById("chat-messages");
+
+// =========================
+// MOSTRAR/OCULTAR WIDGET
+// =========================
+supportBtn.addEventListener("click", () => {
+    supportWindow.style.display =
+      supportWindow.style.display === "block" ? "none" : "block";
+});
+
+// =========================
+// VERIFICAR HORARIO
+// =========================
+function soporteAbierto() {
+    const ahora = new Date();
+    const hora = ahora.getHours();
+    return hora >= horario.apertura && hora < horario.cierre;
+}
+
+// =========================
+// INICIO DEL CHAT
+// =========================
+startChatBtn.addEventListener("click", () => {
+    const nombre = document.getElementById("client-name").value.trim();
+
+    if (nombre === "") return alert("Por favor escribe tu nombre.");
+
+    localStorage.setItem("support_client_name", nombre);
+
+    if (!soporteAbierto()) {
+        closedMessage.style.display = "block";
+        closedMessage.innerText =
+          `Soporte cerrado. Horario: ${horario.apertura}:00 a ${horario.cierre}:00`;
+        return;
+    }
+
+    nameStep.style.display = "none";
+    chatStep.style.display = "block";
+
+    addMessage(`Hola ${nombre}, ¿en qué podemos ayudarte hoy?`, "support");
+});
+
+
+// =========================
+// FUNCIÓN PARA AGREGAR MENSAJES
+// =========================
+function addMessage(text, sender) {
+    const msg = document.createElement("div");
+    msg.classList.add("message", sender); // <-- user / support
+    msg.textContent = text;
+
+    messagesDiv.appendChild(msg);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// =========================
+// ENVÍO DE MENSAJE
+// =========================
+sendMessageBtn.addEventListener("click", () => {
+    const input = document.getElementById("message-input");
+    const texto = input.value.trim();
+    const nombre = localStorage.getItem("support_client_name");
+
+    if (!texto || !nombre) return;
+
+    addMessage(texto, "user");
+    input.value = "";
+
+    // 🔥 ENVIAR AL DASHBOARD
+    window.postMessage({
+        channel: "caribetech-support",
+        nombre,
+        texto
+    }, "*");
+});
+
+// =========================
+// RECIBIR MENSAJES DEL SOPORTE
+// =========================
+window.addEventListener("message", (e) => {
+  const data = e.data;
+
+  if (!data || data.channel !== "caribetech-support-reply") return;
+
+  const { texto } = data;
+  if (!texto) return;
+
+  addMessage(texto, "support");
+});
+
+
+</script>

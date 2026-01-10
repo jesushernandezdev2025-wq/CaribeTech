@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - CaribeTech Dashboard</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #0b6a8a, #0a5a74);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      width: 320px;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #0b6a8a;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #0b6a8a;
+      box-shadow: 0 0 4px rgba(11,106,138,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0b6a8a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #0a5a74;
+    }
+
+    .error {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>CaribeTech Dashboard</h2>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <input type="number" id="pin" placeholder="PIN">
+    <button id="login-btn">Entrar</button>
+    <p class="error" id="error-msg">Credenciales incorrectas</p>
+  </div>
+
+  <script>
+    // =========================
+    // CREDENCIALES EDITABLES
+    // =========================
+    const credenciales = {
+      username: "admin",
+      password: "Delacruz1969@gmail.com",
+      pin: "9999"
+    };
+
+    // =========================
+    // VALIDACIÓN DE LOGIN
+    // =========================
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const pin = document.getElementById("pin").value.trim();
+      const errorMsg = document.getElementById("error-msg");
+
+      if (
+        user === credenciales.username &&
+        pass === credenciales.password &&
+        pin === credenciales.pin
+      ) {
+        // Redirige al dashboard
+        window.location.href = "dashboard.html";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

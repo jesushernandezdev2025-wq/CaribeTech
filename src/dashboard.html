@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Soporte - CaribeTech</title>
+  <link rel="stylesheet" href="../css/style-dashboard.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+  <h3 id="active-tab">Usuarios</h3>
+  <h3 id="archived-tab" class="archived-title">Archivados</h3>
+
+  <div id="user-list"></div>
+</aside>
+
+  <!-- CHAT -->
+  <main id="chat-panel">
+    <header id="chat-header">Selecciona un usuario</header>
+
+    <section id="chat-messages"></section>
+
+    <footer id="chat-input">
+      <button id="emoji-btn">😀</button>
+
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Escribe un mensaje..."
+        autocomplete="off"
+      />
+
+      <button id="send-message">Enviar</button>
+
+
+      <header id="chat-header">
+  <span id="chat-title">Selecciona un usuario</span>
+  <button id="close-chat" title="Cerrar chat">✖</button>
+</header>
+
+      <!-- Emojis / GIFs -->
+      <div id="emoji-panel">
+        <img src="../img/chat/512 (1).gif" class="emoji-item" />
+        <img src="../img/chat/512 (2).gif" class="emoji-item" />
+        <img src="../img/chat/512 (3).gif" class="emoji-item" />
+        <img src="../img/chat/512 (4).gif" class="emoji-item" />
+        <img src="../img/chat/512 (5).gif" class="emoji-item" />
+        <img src="../img/chat/512 (6).gif" class="emoji-item" />
+        <img src="../img/chat/512 (7).gif" class="emoji-item" />
+        <img src="../img/chat/512 (8).gif" class="emoji-item" />
+        <img src="../img/chat/512 (9).gif" class="emoji-item" />
+        <img src="../img/chat/512 (10).gif" class="emoji-item" />
+        <img src="../img/chat/512 (11).gif" class="emoji-item" />
+        <img src="../img/chat/512 (12).gif" class="emoji-item" />
+        <img src="../img/chat/512 (13).gif" class="emoji-item" />
+        <img src="../img/chat/512 (14).gif" class="emoji-item" />
+        <img src="../img/chat/512 (15).gif" class="emoji-item" />
+        <img src="../img/chat/512 (16).gif" class="emoji-item" />
+        <img src="../img/chat/512 (17).gif" class="emoji-item" />
+        <img src="../img/chat/512 (18).gif" class="emoji-item" />
+        <img src="../img/chat/512 (19).gif" class="emoji-item" />
+      </div>
+    </footer>
+  </main>
+
+  <script src="../js/chat.js"></script>
+</body>
+</html>

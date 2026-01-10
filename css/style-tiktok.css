@@ -1,0 +1,263 @@
+/* =====================================================
+   RESET Y BASE GENERAL
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #4b6e86;
+  color: #EAF5FF;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor general */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* =====================================================
+   HEADER FIJO CON MEJORAS
+   ===================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.582);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #0E1A24;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-bottom: 3px;
+  transition: color 0.25s ease, border 0.25s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #0B6A8A;
+  border-color: #0B6A8A;
+}
+
+/* =====================================================
+   TÍTULOS E INTRO
+===================================================== */
+.title {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 120px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #4ef2ff, #0bf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.intro {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 50px;
+  font-size: 1.15rem;
+  color: #cce9f5;
+}
+
+/* =====================================================
+   GRID DE VIDEOS
+===================================================== */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  padding-bottom: 60px;
+}
+
+.video-grid blockquote {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.video-grid blockquote:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 200, 255, 0.08);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+  background: #0a1219;
+  padding: 40px 20px;
+  text-align: center;
+  color: #AFC4D1;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer p {
+  font-size: 0.95rem;
+}
+
+/* =====================================================
+   ANIMACIONES
+===================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 920px) {
+  .header-container { padding: 14px 20px; }
+  .nav ul { gap: 20px; }
+}
+
+@media (max-width: 650px) {
+  .title { font-size: 2.4rem; }
+  .intro { font-size: 1rem; }
+  .video-grid { gap: 18px; }
+}
+
+@media (max-width: 490px) {
+  .logo { font-size: 1.5rem; }
+  .video-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 490px) {
+  .logo img {
+    width: 200px;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+}
+
+/* =====================================================
+   MENÚ MÓVIL — Versión limpia y profesional
+   ===================================================== */
+
+/* Contenedor del botón hamburguesa */
+.mobile-menu-toggle {
+  display: none; /* Oculto en escritorio */
+  flex-direction: column;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Líneas del icono */
+.hamburger-line {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background-color: #0E1A24;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* Menú móvil */
+.nav ul.nav-open {
+  display: flex !important;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 25px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  animation: slideDown 0.35s ease forwards;
+}
+
+/* Animación suave hacia abajo */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mostrar menú solo en móvil */
+@media (max-width: 900px) {
+  .nav ul {
+    display: none; /* Oculto hasta que se active */
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+/* Asegurar que las pseudo-capas de las tarjetas no afecten el menú */
+.feature-card::before,
+.feature-card::after {
+  pointer-events: none;
+}

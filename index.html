@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaribeTech - Cargando...</title>
+  <link rel="stylesheet" href="css/style-carga.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/Logos/Favicon Web.png">
+</head>
+<body>
+
+  <div class="loader-container">
+
+    <!-- Logo animado -->
+    <div class="logo-img"></div>
+
+    <!-- Spinner 3D -->
+    <div class="spinner"></div>
+
+    <!-- Texto de carga -->
+    <p class="loading-text">Cargando, por favor espere...</p>
+
+  </div>
+
+  <!-- Redirección automática con fade -->
+  <script>
+    setTimeout(() => {
+      // efecto fade out
+      document.querySelector('.loader-container').style.opacity = '0';
+      setTimeout(() => {
+        window.location.href = "src/inicio.html";
+      }, 600); // fade out duration
+    }, 3500); // tiempo total de carga visible
+  </script>
+
+</body>
+</html>

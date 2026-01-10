@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CaribeTech - Aplicaciones</title>
+  <link rel="stylesheet" href="../css/style-app.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../img/Logos/Favicon Web.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="logo">
+      <a href="inicio.html" aria-label="CaribeTech Inicio">
+       <img src="../img/Logos/CaribeTech - LogoWeb.png" alt="Logo CaribeTech" width="180" height="50" loading="lazy">
+      </a>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Navegación principal">
+      <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="app.html" class="active" aria-current="page">Aplicaciones</a></li>
+        <li><a href="tiktok.html">TikTok</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="pronto.html">Tools</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón menú móvil (mejora accesibilidad) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+
+  <!-- ===========================
+        CONTENIDO PRINCIPAL
+  ============================ -->
+  <main class="apps-section">
+
+    <section class="apps-intro">
+      <h1>Nuestras Aplicaciones</h1>
+      <p>Innovación desarrollada para impulsar el Caribe hacia el futuro digital.</p>
+    </section>
+
+    <!-- =============== CARD APP =============== -->
+    <section class="app-card">
+      <div class="app-info">
+        <h2>ReparaRD</h2>
+        <p>
+          La aplicación que conecta técnicos confiables con usuarios en toda la República Dominicana.
+          Un sistema moderno que permite solicitar reparaciones, chatear, ver reputaciones y más.
+        </p>
+
+        <a href="../src/pronto.html" target="_blank" class="btn-download">
+          Descargar Aplicación
+        </a>
+      </div>
+
+      <div class="app-img">
+        <img src="../img/Apps/RPpreview.jpeg" alt="Vista previa de ReparaRD Mobile" />
+      </div>
+    </section>
+
+    <section class="app-card">
+      <div class="app-info">
+        <h2>ReparaRD Studio</h2>
+        <p>
+          La plataforma diseñada para técnicos especializados en reparaciones. 
+         Un sistema moderno y eficiente que asigna cada trabajo según la experiencia 
+         y especialidad del profesional, garantizando calidad y rapidez en cada servicio.
+        </p>
+
+        <a href="../src/pronto.html" target="_blank" class="btn-download">
+          Descargar Aplicación
+        </a>
+      </div>
+
+      <div class="app-img">
+        <img src="../img/Apps/RPpreviewStudio.png" alt="Vista previa de ReparaRD Mobile" />
+      </div>
+    </section>
+
+    <!-- ======== TEMPLATE PARA AÑADIR MÁS APPS ======== -->
+    <!--
+    <section class="app-card">
+      <div class="app-info">
+        <h2>Nombre de la App</h2>
+        <p>Descripción breve y profesional.</p>
+        <a href="#" class="btn-download" target="_blank">Descargar</a>
+      </div>
+      <div class="app-img">
+        <img src="../img/otra-app.png" alt="Vista previa">
+      </div>
+    </section>
+    -->
+
+  </main>
+
+  <!-- ===========================
+        FOOTER
+  ============================ -->
+  <footer class="footer">
+    <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+
+</body>
+</html>
