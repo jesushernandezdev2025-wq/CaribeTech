@@ -1,3 +1,3 @@
 git add .
-git commit -m "Moviendo index.html a la raiz"
+git commit -m "mensaje de cambios"
 git push
