@@ -217,45 +217,7 @@
         </nav>
       </div>
     </div>
-
-    <!-- WIDGET DE SOPORTE 
-<div id="support-widget">
-  <div id="support-button">
-    <img src="../img/Widget/soporte.png" alt="Soporte" />
-  </div>
-
-  <div id="support-window">
-    <div id="support-header">
-      <h3>Soporte en Vivo</h3>
-    </div>
-
-    <div id="support-content">
-      
-      <!-- Paso 1: ingresar nombre 
-      <div id="name-step">
-        <p>Por favor, ingresa tu nombre para comenzar:</p>
-        <input type="text" id="client-name" placeholder="Tu nombre…">
-        <button id="start-chat">Comenzar</button>
-      </div>
-
-      <!-- Paso 2: chat activo 
-      <div id="chat-step" style="display:none;">
-        <div id="chat-messages"></div>
-
-        <div id="chat-input">
-          <input type="text" id="message-input" placeholder="Escribe un mensaje...">
-          <button id="send-message">Enviar</button>
-        </div>
-      </div>
-
-      <!-- Horario cerrado -
-      <p id="closed-message" style="display:none; color:#e74c3c; font-weight:bold;"></p>
-
-    </div>
-  </div>
-</div>
--->
-
+    
     <div class="footer-bottom">
       <p><a href="contacto.html">Contáctanos</a></p>
       <p>&copy; 2025 CaribeTech. Todos los derechos reservados.</p>
@@ -414,116 +376,570 @@ climaMenu.querySelectorAll("button").forEach(btn => {
 
 </script>
 
+<!-- ============================================================
+     CARIBETECH — WIDGET DE SOPORTE EN VIVO
+     Pega este bloque completo antes del </body> de tu inicio.html
+     Asegúrate de que inicio.html esté en la misma carpeta que dashboard.html
+     ============================================================ -->
+
+<!-- ── ESTILOS DEL WIDGET ── -->
+<style>
+  :root {
+    --ct-bg: #0b1a2e;
+    --ct-header: #082030;
+    --ct-border: rgba(0,200,180,0.2);
+    --ct-accent: #00c8b4;
+    --ct-text: #e8f4f2;
+    --ct-muted: #5a8a84;
+    --ct-user-bubble: #0d2a3e;
+    --ct-agent-bubble: rgba(0,200,180,0.1);
+    --ct-input-bg: rgba(0,200,180,0.06);
+  }
+
+  #ct-widget {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  /* ── Ventana del chat ── */
+  #ct-window {
+    width: 340px;
+    height: 520px;
+    background: var(--ct-bg);
+    border: 1px solid var(--ct-border);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,200,180,0.04);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: bottom right;
+  }
+
+  #ct-window.ct-open {
+    display: flex;
+    animation: ct-popIn 0.25s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  @keyframes ct-popIn {
+    from { transform: scale(0.85) translateY(12px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  /* Header */
+  .ct-header {
+    background: var(--ct-header);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--ct-border);
+    flex-shrink: 0;
+  }
+
+  .ct-avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--ct-accent), #0070ff);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px; color: #fff;
+    flex-shrink: 0;
+    font-family: system-ui, sans-serif;
+  }
+
+  .ct-header-info h4 {
+    font-size: 14px; font-weight: 700; color: #fff; margin: 0;
+  }
+
+  .ct-header-info p {
+    font-size: 11px; color: var(--ct-muted); margin: 2px 0 0;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .ct-status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #2ecc71; box-shadow: 0 0 6px #2ecc71;
+    flex-shrink: 0;
+  }
+  .ct-status-dot.closed { background: #e74c3c; box-shadow: 0 0 6px #e74c3c; }
+
+  .ct-close-btn {
+    margin-left: auto; background: none; border: none;
+    color: var(--ct-muted); cursor: pointer; font-size: 18px;
+    line-height: 1; padding: 4px; transition: color 0.2s;
+  }
+  .ct-close-btn:hover { color: #fff; }
+
+  /* Body scrollable */
+  .ct-body {
+    flex: 1; overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .ct-body::-webkit-scrollbar { width: 4px; }
+  .ct-body::-webkit-scrollbar-thumb { background: var(--ct-border); border-radius: 2px; }
+
+  /* ── Paso 1: Nombre ── */
+  #ct-name-step {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; height: 100%; padding: 20px;
+    text-align: center; gap: 12px;
+  }
+
+  #ct-name-step .ct-welcome-icon { font-size: 40px; }
+
+  #ct-name-step h3 {
+    font-size: 16px; font-weight: 700; color: #fff; margin: 0;
+  }
+
+  #ct-name-step p {
+    font-size: 13px; color: var(--ct-muted); line-height: 1.6; margin: 0;
+  }
+
+  #ct-name-input {
+    width: 100%; padding: 11px 14px;
+    background: var(--ct-input-bg); border: 1px solid var(--ct-border);
+    border-radius: 10px; color: var(--ct-text);
+    font-size: 14px; outline: none; text-align: center;
+    transition: border-color 0.2s; font-family: inherit;
+  }
+  #ct-name-input:focus { border-color: var(--ct-accent); }
+  #ct-name-input::placeholder { color: var(--ct-muted); }
+
+  #ct-start-btn {
+    width: 100%; padding: 12px;
+    background: linear-gradient(135deg, var(--ct-accent), #00a896);
+    border: none; border-radius: 10px;
+    color: #000; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: transform 0.15s;
+    font-family: inherit;
+    box-shadow: 0 4px 16px rgba(0,200,180,0.3);
+  }
+  #ct-start-btn:hover { transform: scale(1.02); }
+
+  /* ── Paso 2: Chat ── */
+  #ct-chat-step {
+    display: none; flex-direction: column; height: 100%;
+  }
+
+  .ct-messages {
+    flex: 1; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 8px; padding: 2px 0;
+  }
+  .ct-messages::-webkit-scrollbar { width: 3px; }
+  .ct-messages::-webkit-scrollbar-thumb { background: var(--ct-border); border-radius: 2px; }
+
+  .ct-msg-wrap {
+    display: flex; flex-direction: column;
+  }
+  .ct-msg-wrap.user { align-items: flex-end; }
+  .ct-msg-wrap.agent { align-items: flex-start; }
+
+  .ct-bubble {
+    max-width: 82%; padding: 9px 13px; border-radius: 14px;
+    font-size: 13px; line-height: 1.5; word-break: break-word; color: var(--ct-text);
+  }
+  .ct-bubble.user {
+    background: var(--ct-user-bubble); border-bottom-right-radius: 4px;
+    border: 1px solid rgba(0,100,150,0.3);
+  }
+  .ct-bubble.agent {
+    background: var(--ct-agent-bubble); border-bottom-left-radius: 4px;
+    border: 1px solid rgba(0,200,180,0.15);
+  }
+
+  .ct-msg-time {
+    font-size: 10px; color: var(--ct-muted);
+    margin-top: 2px; padding: 0 2px;
+  }
+  .ct-msg-wrap.user .ct-msg-time { text-align: right; }
+
+  /* Typing indicator */
+  .ct-typing {
+    display: none; align-self: flex-start;
+    background: var(--ct-agent-bubble);
+    border: 1px solid rgba(0,200,180,0.15);
+    padding: 10px 14px; border-radius: 14px; border-bottom-left-radius: 4px;
+  }
+  .ct-typing span {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--ct-accent); border-radius: 50%;
+    margin: 0 2px; animation: ct-bob 1.2s infinite;
+  }
+  .ct-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .ct-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes ct-bob {
+    0%,80%,100% { transform: translateY(0); opacity:0.5; }
+    40%          { transform: translateY(-6px); opacity:1; }
+  }
+
+  /* Soporte cerrado */
+  #ct-closed-msg {
+    display: none; flex-direction: column; align-items: center;
+    justify-content: center; height: 100%;
+    gap: 12px; text-align: center; padding: 20px;
+  }
+  #ct-closed-msg .ct-closed-icon { font-size: 40px; }
+  #ct-closed-msg h3 { font-size: 15px; font-weight: 700; color: #fff; margin: 0; }
+  #ct-closed-msg p  { font-size: 13px; color: var(--ct-muted); line-height: 1.6; margin: 0; }
+
+  /* ── Input area ── */
+  .ct-input-area {
+    padding: 12px 14px; border-top: 1px solid var(--ct-border);
+    display: none; gap: 8px; align-items: center;
+    flex-shrink: 0; background: var(--ct-header);
+  }
+
+  .ct-input-area input {
+    flex: 1; background: var(--ct-input-bg);
+    border: 1px solid var(--ct-border); border-radius: 10px;
+    padding: 10px 14px; color: var(--ct-text);
+    font-size: 13px; outline: none; font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .ct-input-area input:focus { border-color: var(--ct-accent); }
+  .ct-input-area input::placeholder { color: var(--ct-muted); }
+
+  .ct-send-btn {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--ct-accent), #00a896);
+    border: none; border-radius: 10px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s;
+  }
+  .ct-send-btn:hover { transform: scale(1.08); }
+  .ct-send-btn svg {
+    width: 16px; height: 16px; stroke: #000; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* ── FAB ── */
+  #ct-fab {
+    width: 58px; height: 58px;
+    background: linear-gradient(135deg, var(--ct-accent), #00a896);
+    border: none; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(0,200,180,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  #ct-fab:hover { transform: scale(1.1); box-shadow: 0 12px 36px rgba(0,200,180,0.5); }
+  #ct-fab svg {
+    width: 26px; height: 26px; stroke: #000; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  #ct-unread-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 20px; height: 20px; background: #ff5c6a;
+    border-radius: 50%; font-size: 11px; font-weight: 700;
+    color: #fff; display: none;
+    align-items: center; justify-content: center;
+  }
+  #ct-unread-badge.show { display: flex; }
+</style>
+
+<!-- ── HTML DEL WIDGET ── -->
+<div id="ct-widget">
+
+  <!-- Ventana del chat -->
+  <div id="ct-window">
+
+    <!-- Header -->
+    <div class="ct-header">
+      <div class="ct-avatar">CT</div>
+      <div class="ct-header-info">
+        <h4>Soporte CaribeTech</h4>
+        <p>
+          <span class="ct-status-dot" id="ct-status-dot"></span>
+          <span id="ct-status-label">Conectando…</span>
+        </p>
+      </div>
+      <button class="ct-close-btn" onclick="ctToggle()">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="ct-body">
+
+      <!-- Paso 1: nombre -->
+      <div id="ct-name-step">
+        <div class="ct-welcome-icon">👋</div>
+        <h3>¡Hola! Bienvenido/a</h3>
+        <p>Estamos aquí para ayudarte. Ingresa tu nombre para iniciar el chat.</p>
+        <input type="text" id="ct-name-input" placeholder="Tu nombre…" maxlength="40"
+               onkeydown="if(event.key==='Enter') ctStartChat()" />
+        <button id="ct-start-btn" onclick="ctStartChat()">Iniciar conversación →</button>
+      </div>
+
+      <!-- Paso 2: chat -->
+      <div id="ct-chat-step">
+        <div class="ct-messages" id="ct-messages"></div>
+        <div class="ct-typing" id="ct-typing">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Soporte cerrado -->
+      <div id="ct-closed-msg">
+        <div class="ct-closed-icon">🕐</div>
+        <h3>Soporte cerrado</h3>
+        <p id="ct-closed-text"></p>
+      </div>
+
+    </div>
+
+    <!-- Input -->
+    <div class="ct-input-area" id="ct-input-area">
+      <input type="text" id="ct-msg-input" placeholder="Escribe un mensaje…"
+             onkeydown="if(event.key==='Enter') ctSendMsg()" />
+      <button class="ct-send-btn" onclick="ctSendMsg()">
+        <svg viewBox="0 0 24 24">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Botón flotante -->
+  <button id="ct-fab" onclick="ctToggle()" title="Soporte en vivo">
+    <svg id="ct-icon-chat" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <svg id="ct-icon-close" viewBox="0 0 24 24" style="display:none">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+    <div id="ct-unread-badge">0</div>
+  </button>
+
+</div>
+
+<!-- ── SCRIPT DEL WIDGET ── -->
 <script>
-// =========================
-// CONFIGURACIÓN DE HORARIO
-// =========================
-const horario = {
-    apertura: 0,   // 8 AM
-    cierre: 24    // 12 AM
-};
+(function () {
 
-const SUPPORT_CHANNEL = "caribetech-support";
+  // ── CONFIG ─────────────────────────────────────────
+  // Cambia estos valores según tu horario real.
+  // apertura y cierre en horas (0-23). 0 y 24 = siempre abierto.
+  const HORARIO       = { apertura: 0, cierre: 24 };
+  const CHANNEL_OUT   = 'ct-client-to-agent';   // debe coincidir con dashboard.html
+  const CHANNEL_IN    = 'ct-agent-to-client';   // debe coincidir con dashboard.html
+  const SESSION_KEY   = 'ct_client_session';
+  // ───────────────────────────────────────────────────
 
-// =========================
-// ELEMENTOS
-// =========================
-const supportBtn = document.getElementById("support-button");
-const supportWindow = document.getElementById("support-window");
-const nameStep = document.getElementById("name-step");
-const chatStep = document.getElementById("chat-step");
-const closedMessage = document.getElementById("closed-message");
-const startChatBtn = document.getElementById("start-chat");
-const sendMessageBtn = document.getElementById("send-message");
-const messagesDiv = document.getElementById("chat-messages");
+  let clientId    = null;
+  let clientName  = null;
+  let messages    = [];
+  let widgetOpen  = false;
+  let unreadCount = 0;
 
-// =========================
-// MOSTRAR/OCULTAR WIDGET
-// =========================
-supportBtn.addEventListener("click", () => {
-    supportWindow.style.display =
-      supportWindow.style.display === "block" ? "none" : "block";
-});
+  const bcOut = new BroadcastChannel(CHANNEL_OUT);
+  const bcIn  = new BroadcastChannel(CHANNEL_IN);
 
-// =========================
-// VERIFICAR HORARIO
-// =========================
-function soporteAbierto() {
-    const ahora = new Date();
-    const hora = ahora.getHours();
-    return hora >= horario.apertura && hora < horario.cierre;
-}
+  // ── Recuperar sesión previa ──────────────────────
+  (function initSession() {
+    try {
+      const raw = localStorage.getItem(SESSION_KEY);
+      if (raw) {
+        const s = JSON.parse(raw);
+        clientId   = s.clientId   || null;
+        clientName = s.name       || null;
+        messages   = s.messages   || [];
+      }
+    } catch {}
+    updateStatus();
+  })();
 
-// =========================
-// INICIO DEL CHAT
-// =========================
-startChatBtn.addEventListener("click", () => {
-    const nombre = document.getElementById("client-name").value.trim();
+  // ── Estado del servicio ──────────────────────────
+  function soporteAbierto() {
+    const h = new Date().getHours();
+    return h >= HORARIO.apertura && h < HORARIO.cierre;
+  }
 
-    if (nombre === "") return alert("Por favor escribe tu nombre.");
+  function updateStatus() {
+    const dot   = document.getElementById('ct-status-dot');
+    const label = document.getElementById('ct-status-label');
+    if (soporteAbierto()) {
+      dot.classList.remove('closed');
+      label.textContent = 'En línea · Respuesta inmediata';
+    } else {
+      dot.classList.add('closed');
+      label.textContent = `Cerrado · ${HORARIO.apertura}:00–${HORARIO.cierre}:00`;
+    }
+  }
 
-    localStorage.setItem("support_client_name", nombre);
+  // ── Toggle del widget ────────────────────────────
+  window.ctToggle = function () {
+    widgetOpen = !widgetOpen;
+    const win = document.getElementById('ct-window');
 
-    if (!soporteAbierto()) {
-        closedMessage.style.display = "block";
-        closedMessage.innerText =
-          `Soporte cerrado. Horario: ${horario.apertura}:00 a ${horario.cierre}:00`;
-        return;
+    win.classList.toggle('ct-open', widgetOpen);
+    document.getElementById('ct-icon-chat').style.display  = widgetOpen ? 'none'  : 'block';
+    document.getElementById('ct-icon-close').style.display = widgetOpen ? 'block' : 'none';
+
+    if (widgetOpen) {
+      unreadCount = 0;
+      const badge = document.getElementById('ct-unread-badge');
+      badge.classList.remove('show');
+      updateStatus();
+
+      // Si ya hay sesión activa, ir directo al chat
+      if (clientId && clientName) {
+        showChatStep();
+      }
+    }
+  };
+
+  // ── Iniciar chat ─────────────────────────────────
+  window.ctStartChat = function () {
+    const nameEl = document.getElementById('ct-name-input');
+    const name   = nameEl.value.trim();
+
+    if (!name) {
+      nameEl.style.borderColor = '#ff5c6a';
+      nameEl.placeholder = 'Por favor escribe tu nombre';
+      setTimeout(() => {
+        nameEl.style.borderColor = '';
+        nameEl.placeholder = 'Tu nombre…';
+      }, 2000);
+      return;
     }
 
-    nameStep.style.display = "none";
-    chatStep.style.display = "block";
+    if (!soporteAbierto()) {
+      document.getElementById('ct-name-step').style.display = 'none';
+      const closed = document.getElementById('ct-closed-msg');
+      closed.style.display = 'flex';
+      document.getElementById('ct-closed-text').textContent =
+        `Nuestro horario es de ${HORARIO.apertura}:00 a ${HORARIO.cierre}:00. Vuelve pronto.`;
+      return;
+    }
 
-    addMessage(`Hola ${nombre}, ¿en qué podemos ayudarte hoy?`, "support");
-});
+    // Crear o reutilizar ID de cliente
+    if (!clientId) clientId = 'ct-' + Math.random().toString(36).slice(2,10) + Date.now().toString(36);
+    clientName = name;
+    messages   = [];
+    saveSession();
 
+    showChatStep();
 
-// =========================
-// FUNCIÓN PARA AGREGAR MENSAJES
-// =========================
-function addMessage(text, sender) {
-    const msg = document.createElement("div");
-    msg.classList.add("message", sender); // <-- user / support
-    msg.textContent = text;
+    // Mensaje de bienvenida local (no va al dashboard)
+    appendLocalMsg('agent', `¡Hola ${name}! 👋 Gracias por contactar a CaribeTech. ¿En qué podemos ayudarte hoy?`);
 
-    messagesDiv.appendChild(msg);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
+    // Notificar al dashboard que arrancó la sesión
+    bcOut.postMessage({
+      clientId,
+      name: clientName,
+      text: `[Nueva conversación iniciada por: ${name}]`,
+      timestamp: new Date().toISOString(),
+      isSystem: true
+    });
+  };
 
-// =========================
-// ENVÍO DE MENSAJE
-// =========================
-sendMessageBtn.addEventListener("click", () => {
-    const input = document.getElementById("message-input");
-    const texto = input.value.trim();
-    const nombre = localStorage.getItem("support_client_name");
+  // ── Mostrar paso del chat ────────────────────────
+  function showChatStep() {
+    document.getElementById('ct-name-step').style.display   = 'none';
+    document.getElementById('ct-closed-msg').style.display  = 'none';
+    document.getElementById('ct-chat-step').style.display   = 'flex';
+    document.getElementById('ct-input-area').style.display  = 'flex';
 
-    if (!texto || !nombre) return;
+    // Renderizar historial
+    const container = document.getElementById('ct-messages');
+    container.innerHTML = '';
+    messages.forEach(m => renderMsg(m));
+    container.scrollTop = container.scrollHeight;
 
-    addMessage(texto, "user");
-    input.value = "";
+    setTimeout(() => document.getElementById('ct-msg-input').focus(), 60);
+  }
 
-    // 🔥 ENVIAR AL DASHBOARD
-    window.postMessage({
-        channel: "caribetech-support",
-        nombre,
-        texto
-    }, "*");
-});
+  // ── Enviar mensaje ───────────────────────────────
+  window.ctSendMsg = function () {
+    if (!clientId) return;
+    const input = document.getElementById('ct-msg-input');
+    const text  = input.value.trim();
+    if (!text) return;
 
-// =========================
-// RECIBIR MENSAJES DEL SOPORTE
-// =========================
-window.addEventListener("message", (e) => {
-  const data = e.data;
+    const timestamp = new Date().toISOString();
+    const msg = { sender: 'user', text, time: timestamp };
+    messages.push(msg);
+    saveSession();
+    renderMsg(msg);
+    input.value = '';
 
-  if (!data || data.channel !== "caribetech-support-reply") return;
+    // Enviar al dashboard
+    bcOut.postMessage({ clientId, name: clientName, text, timestamp });
+  };
 
-  const { texto } = data;
-  if (!texto) return;
+  // ── Recibir respuesta del agente ─────────────────
+  bcIn.onmessage = function (e) {
+    const { clientId: target, text, timestamp } = e.data;
+    if (target !== clientId) return;               // no es para esta sesión
 
-  addMessage(texto, "support");
-});
+    const msg = { sender: 'agent', text, time: timestamp || new Date().toISOString() };
+    messages.push(msg);
+    saveSession();
 
+    document.getElementById('ct-typing').style.display = 'none';
+    renderMsg(msg);
 
+    if (!widgetOpen) {
+      unreadCount++;
+      const badge = document.getElementById('ct-unread-badge');
+      badge.textContent = unreadCount;
+      badge.classList.add('show');
+    }
+  };
+
+  // ── Render de un mensaje ─────────────────────────
+  function renderMsg(msg) {
+    const container = document.getElementById('ct-messages');
+
+    const wrap   = document.createElement('div');
+    wrap.className = 'ct-msg-wrap ' + msg.sender;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'ct-bubble ' + msg.sender;
+    bubble.textContent = msg.text;
+
+    const time = document.createElement('div');
+    time.className = 'ct-msg-time';
+    time.textContent = fmtTime(msg.time);
+
+    wrap.appendChild(bubble);
+    wrap.appendChild(time);
+    container.appendChild(wrap);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function appendLocalMsg(sender, text) {
+    const msg = { sender, text, time: new Date().toISOString() };
+    messages.push(msg);
+    saveSession();
+    renderMsg(msg);
+  }
+
+  // ── Persistencia ─────────────────────────────────
+  function saveSession() {
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ clientId, name: clientName, messages }));
+    } catch {}
+  }
+
+  // ── Utilidades ───────────────────────────────────
+  function fmtTime(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' });
+  }
+
+})();
 </script>
+<!-- ============================================================
+     FIN DEL WIDGET DE SOPORTE CARIBETECH
+     ============================================================ -->
